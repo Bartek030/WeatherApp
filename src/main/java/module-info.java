@@ -5,4 +5,5 @@ module pl.bartlomiej_swies {
     opens pl.bartlomiej_swies;
     opens pl.bartlomiej_swies.view;
     opens pl.bartlomiej_swies.controller;
+    opens pl.bartlomiej_swies.model;
 }
