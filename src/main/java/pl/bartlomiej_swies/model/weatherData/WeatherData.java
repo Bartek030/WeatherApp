@@ -21,6 +21,11 @@ public abstract class WeatherData {
         return doubleValue;
     }
 
+    protected int getIntegerValueFromJsonObject(String object, String key) {
+        int integerValue = jsonObject.getJSONObject(object).getInt(key);
+        return integerValue;
+    }
+
     protected String getStringValueFromJsonArray(String object, String key) {
         JSONArray jsonArray = jsonObject.getJSONArray(object);
         for(int i = 0; i < jsonArray.length(); i++){
@@ -35,6 +40,15 @@ public abstract class WeatherData {
         for(int i = 0; i < jsonArray.length(); i++){
             double doubleValue = jsonArray.getJSONObject(i).getDouble(key);
             return doubleValue;
+        }
+        return null;
+    }
+
+    protected Integer getIntegerValueFromJsonArray(String object, String key) {
+        JSONArray jsonArray = jsonObject.getJSONArray(object);
+        for(int i = 0; i < jsonArray.length(); i++){
+            int value = jsonArray.getJSONObject(i).getInt(key);
+            return value;
         }
         return null;
     }
