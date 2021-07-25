@@ -28,6 +28,8 @@ public class OpenWeatherMapApiQuery {
         this.dailyWeatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?"
                 + "lat=" +	this.getCurrentWeatherData().getCoord().getLat()
                 + "&lon=" + this.getCurrentWeatherData().getCoord().getLon()
+                + "&units=metric"
+                + "&lang=pl"
                 + "&exclude=current,minutely,hourly,alerts"
                 + "&appid=" + Config.getOpenWeatherMapApiKey();
     }

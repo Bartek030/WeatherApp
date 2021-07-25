@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import pl.bartlomiej_swies.model.OneDayDataForDailyForecast;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
@@ -35,6 +37,9 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label currentWeatherWindSpeed;
 
     @FXML
+    private HBox weeklyWeatherHBox;
+
+    @FXML
     void showForecastButton() {
 
     }
@@ -46,11 +51,25 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCurrentWeatherData();
+        setDailyWeatherForecast();
+    }
+
+    private void setCurrentWeatherData() {
         setCurrentWeatherImage();
         setCurrentWeatherTemperature();
         setCurrentWeatherDescription();
         setWeatherWindImage();
         setCurrentWeatherWindSpeed();
+    }
+
+    private void setDailyWeatherForecast() {
+        int numberOfDays = openWeatherMapApi.getDailyForecastData().getDaily().size();
+
+        for(int i = 0; i < numberOfDays; i++) {
+            OneDayDataForDailyForecast oneDayDataForDailyForecast = new OneDayDataForDailyForecast(openWeatherMapApi.getDailyForecastData().getDaily().get(i));
+            weeklyWeatherHBox.getChildren().add(oneDayDataForDailyForecast.getWeatherData());
+        }
     }
 
     private void setCurrentWeatherImage() {

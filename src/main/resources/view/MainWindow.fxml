@@ -2,6 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -74,7 +77,7 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <HBox minWidth="500.0" prefHeight="150.0" prefWidth="324.0">
+                        <HBox minWidth="300.0" prefHeight="150.0" prefWidth="324.0">
                            <children>
                               <ImageView fx:id="currentWeatherImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="currentWeatherTemperature" text="Temperatura" />
@@ -90,7 +93,20 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="122.0" text="Prognoza tygodniowa" VBox.vgrow="ALWAYS" />
+                        <HBox fx:id="weeklyWeatherHBox" minHeight="200.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0" />
+                        <AreaChart>
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </AreaChart>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />
