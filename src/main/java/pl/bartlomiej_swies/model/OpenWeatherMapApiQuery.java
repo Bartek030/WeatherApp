@@ -12,6 +12,8 @@ import java.net.URLConnection;
 
 public class OpenWeatherMapApiQuery {
 
+    CurrentWeatherData currentWeatherData;
+
     private String urlAsString = "https://api.openweathermap.org/data/2.5/weather?"
             + "q=gorlice"
             + "&units=metric"
@@ -32,12 +34,13 @@ public class OpenWeatherMapApiQuery {
         return result.toString();
     }
 
-    public void loadWeatherData() {
+    public CurrentWeatherData getCurrentWeatherData() {
         try {
             String jsonString = returnConnectionResult();
-            CurrentWeatherData currentWeatherData = new Gson().fromJson(jsonString, CurrentWeatherData.class);
+            currentWeatherData = new Gson().fromJson(jsonString, CurrentWeatherData.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return currentWeatherData;
     }
 }

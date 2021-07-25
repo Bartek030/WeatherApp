@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -30,12 +34,67 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <VBox fx:id="fullWeatherForecastVBox" layoutX="25.0" layoutY="50.0" prefHeight="200.0" prefWidth="950.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="25.0" layoutY="50.0" prefHeight="200.0" prefWidth="950.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0">
             <children>
-                <HBox fx:id="oneCityWeatherForecastHBox" prefHeight="200.0" prefWidth="950.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="todayWeatherImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-               </children></HBox>
+                  <Label text="Podaj nazwę miejscowości:">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="enteredCityTextField" HBox.hgrow="SOMETIMES">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#showForecastButton" text="Pokaż prognozę">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+                <HBox prefHeight="200.0" prefWidth="950.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox minWidth="500.0" prefHeight="150.0" prefWidth="324.0">
+                           <children>
+                              <ImageView fx:id="currentWeatherImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="currentWeatherTemperature" text="Temperatura" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="currentWeatherDescription" text="Stan pogody" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Wiatr" />
+                              <ImageView fx:id="currentWeatherWindImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="currentWeatherWindSpeed" text="Stan wiatru" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></HBox>
             </children>
         </VBox>
         <Button layoutX="25.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="950.0" text="Dodaj miasto" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />

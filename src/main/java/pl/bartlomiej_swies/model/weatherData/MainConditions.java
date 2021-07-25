@@ -11,8 +11,8 @@ public class MainConditions {
         this.humidity = humidity;
     }
 
-    public float getTemp() {
-        return temp;
+    public int getTemp() {
+        return (int) temp;
     }
 
     public int getPressure() {
