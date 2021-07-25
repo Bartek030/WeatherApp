@@ -12,17 +12,49 @@ import java.net.URLConnection;
 
 public class OpenWeatherMapApiQuery {
 
-    CurrentWeatherData currentWeatherData;
+    private CurrentWeatherData currentWeatherData;
+    private DailyForecastData dailyForecastData;
+    private String cityName;
+    private String currentWeatherApiUrl;
+    private String dailyWeatherApiUrl;
 
-    private String urlAsString = "https://api.openweathermap.org/data/2.5/weather?"
-            + "q=gorlice"
-            + "&units=metric"
-            + "&lang=pl"
-            + "&appid=" + Config.getOpenWeatherMapApiKey();
+    public OpenWeatherMapApiQuery(String cityName) {
+        this.cityName = cityName;
+        this.currentWeatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?"
+                + "q=" + cityName
+                + "&units=metric"
+                + "&lang=pl"
+                + "&appid=" + Config.getOpenWeatherMapApiKey();
+        this.dailyWeatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?"
+                + "lat=" +	this.getCurrentWeatherData().getCoord().getLat()
+                + "&lon=" + this.getCurrentWeatherData().getCoord().getLon()
+                + "&exclude=current,minutely,hourly,alerts"
+                + "&appid=" + Config.getOpenWeatherMapApiKey();
+    }
 
-    public String returnConnectionResult() throws IOException {
+    public CurrentWeatherData getCurrentWeatherData() {
+        try {
+            String jsonString = returnDataFromApi(currentWeatherApiUrl);
+            currentWeatherData = new Gson().fromJson(jsonString, CurrentWeatherData.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return currentWeatherData;
+    }
+
+    public DailyForecastData getDailyForecastData() {
+        try {
+            String jsonString = returnDataFromApi(dailyWeatherApiUrl);
+            dailyForecastData = new Gson().fromJson(jsonString, DailyForecastData.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return dailyForecastData;
+    }
+
+    private String returnDataFromApi(String stringForApiRequest) throws IOException {
         StringBuilder result = new StringBuilder();
-        URL url = new URL(urlAsString);
+        URL url = new URL(stringForApiRequest);
         URLConnection urlConnection = url.openConnection();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
@@ -32,15 +64,5 @@ public class OpenWeatherMapApiQuery {
         }
         bufferedReader.close();
         return result.toString();
-    }
-
-    public CurrentWeatherData getCurrentWeatherData() {
-        try {
-            String jsonString = returnConnectionResult();
-            currentWeatherData = new Gson().fromJson(jsonString, CurrentWeatherData.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return currentWeatherData;
     }
 }

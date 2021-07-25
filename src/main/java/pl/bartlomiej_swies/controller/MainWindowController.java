@@ -9,13 +9,12 @@ import javafx.scene.image.ImageView;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
 
-    OpenWeatherMapApiQuery openWeatherMapApi = new OpenWeatherMapApiQuery();
+    OpenWeatherMapApiQuery openWeatherMapApi;
 
     @FXML
     private TextField enteredCityTextField;
@@ -42,6 +41,7 @@ public class MainWindowController extends BaseController implements Initializabl
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
+        openWeatherMapApi = new OpenWeatherMapApiQuery("Gorlice");
     }
 
     @Override

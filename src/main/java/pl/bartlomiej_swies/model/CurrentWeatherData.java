@@ -10,7 +10,7 @@ public class CurrentWeatherData {
     private List<Weather> weather;
     private MainConditions main;
     private WindConditions wind;
-    String name;
+    private String name;
 
     public CurrentWeatherData(Coordinates coord, List<Weather> weather, MainConditions main, WindConditions wind, String name) {
         this.coord = coord;
