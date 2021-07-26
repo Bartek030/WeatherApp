@@ -2,6 +2,7 @@ package pl.bartlomiej_swies.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.AreaChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,6 +39,12 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     private HBox weeklyWeatherHBox;
+
+    @FXML
+    private AreaChart<Number, Number> temperatureChartArea;
+
+    @FXML
+    private Label errorLabel;
 
     @FXML
     void showForecastButton() {
