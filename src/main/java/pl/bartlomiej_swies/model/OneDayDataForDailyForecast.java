@@ -1,15 +1,17 @@
 package pl.bartlomiej_swies.model;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class OneDayDataForDailyForecast {
@@ -20,7 +22,7 @@ public class OneDayDataForDailyForecast {
     private Label dayOfTheWeek;
     private Label dateOfTheDay;
     private HBox windCondition = new HBox();
-    private Label windFieldName = new Label("wiatr");
+    private Label windFieldName = new Label("wiatr: ");
     private ImageView windArrow = new ImageView(getWeatherWindImage());
     private Label windspeed;
     private ImageView weatherIcon;
@@ -30,8 +32,11 @@ public class OneDayDataForDailyForecast {
         setDateInfo();
         setWindConditions();
         setWeatherIcon();
-        windCondition.getChildren().addAll(windFieldName, windArrow, windspeed);
+        windCondition.getChildren().addAll(windFieldName, windspeed, windArrow);
+        windCondition.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         weatherData.getChildren().addAll(dayOfTheWeek, dateOfTheDay, windCondition, weatherIcon);
+        weatherData.setPrefSize(120, Region.USE_COMPUTED_SIZE);
+        weatherData.setAlignment(Pos.CENTER);
     }
 
     private void setDateInfo() {
@@ -46,6 +51,8 @@ public class OneDayDataForDailyForecast {
     private void setWindConditions() {
         windspeed = new Label(dailyForecast.getWind_speed() + " m/s");
         windArrow.setRotate(dailyForecast.getWind_deg());
+        windArrow.setFitWidth(20);
+        windArrow.setFitHeight(20);
     }
 
     private void setWeatherIcon() {
