@@ -2,7 +2,6 @@ package pl.bartlomiej_swies.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.AreaChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -10,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import pl.bartlomiej_swies.model.OneDayDataForDailyForecast;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
+import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.net.URL;
@@ -17,7 +17,8 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
 
-    OpenWeatherMapApiQuery openWeatherMapApi;
+    private OpenWeatherMapApiQuery openWeatherMapApi;
+    private String currentCityName;
 
     @FXML
     private TextField enteredCityTextField;
@@ -41,9 +42,6 @@ public class MainWindowController extends BaseController implements Initializabl
     private HBox weeklyWeatherHBox;
 
     @FXML
-    private AreaChart<Number, Number> temperatureChartArea;
-
-    @FXML
     private Label errorLabel;
 
     @FXML
@@ -53,7 +51,8 @@ public class MainWindowController extends BaseController implements Initializabl
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
-        openWeatherMapApi = new OpenWeatherMapApiQuery("Gorlice");
+        currentCityName = new Geolocation().getCityName();
+        openWeatherMapApi = new OpenWeatherMapApiQuery(currentCityName);
     }
 
     @Override
