@@ -3,9 +3,12 @@ package pl.bartlomiej_swies.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.bartlomiej_swies.controller.BaseController;
+import pl.bartlomiej_swies.controller.DailyForecastController;
 import pl.bartlomiej_swies.controller.MainWindowController;
+import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 
 import java.io.IOException;
 
@@ -16,7 +19,13 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
-    private void initializeStage(BaseController baseController) {
+    public VBox getDailyForecastWindow(DailyForecast dailyForecast) {
+        BaseController controller = new DailyForecastController(this, "/view/DailyForecast.fxml", dailyForecast);
+        VBox dailyForeCastview = (VBox) getloadedFXML(controller);
+        return dailyForeCastview;
+    }
+
+    private Parent getloadedFXML(BaseController baseController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(baseController.getFxmlName()));
         fxmlLoader.setController(baseController);
         Parent parent;
@@ -25,8 +34,13 @@ public class ViewFactory {
             parent = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
+            return null;
         }
+        return parent;
+    }
+
+    private void initializeStage(BaseController baseController) {
+        Parent parent = getloadedFXML(baseController);
 
         Scene scene = new Scene(parent);
         Stage stage = new Stage();

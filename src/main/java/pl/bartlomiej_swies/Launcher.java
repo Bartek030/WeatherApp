@@ -3,7 +3,6 @@ package pl.bartlomiej_swies;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.io.IOException;

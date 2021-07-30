@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import pl.bartlomiej_swies.model.OneDayDataForDailyForecast;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
@@ -45,7 +44,7 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label errorLabel;
 
     @FXML
-    void showForecastButton() {
+    void addNewCityForecastButton() {
 
     }
 
@@ -73,8 +72,7 @@ public class MainWindowController extends BaseController implements Initializabl
         int numberOfDays = openWeatherMapApi.getDailyForecastData().getDaily().size();
 
         for(int i = 0; i < numberOfDays; i++) {
-            OneDayDataForDailyForecast oneDayDataForDailyForecast = new OneDayDataForDailyForecast(openWeatherMapApi.getDailyForecastData().getDaily().get(i));
-            weeklyWeatherHBox.getChildren().add(oneDayDataForDailyForecast.getWeatherData());
+            weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastWindow(openWeatherMapApi.getDailyForecastData().getDaily().get(i)));
         }
     }
 
