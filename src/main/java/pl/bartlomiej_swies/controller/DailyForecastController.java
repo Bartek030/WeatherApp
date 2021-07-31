@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class DailyForecastController extends BaseController implements Initializable {
 
-    DailyForecast dailyForecast;
+    private DailyForecast dailyForecast;
 
     @FXML
     private Label dayOfTheWeekLabel;
@@ -74,6 +74,7 @@ public class DailyForecastController extends BaseController implements Initializ
         URL url = getClass().getResource("/view/img/arrow.png");
         Image image = new Image(String.valueOf(url));
         windImage.setImage(image);
+        windImage.setRotate(dailyForecast.getWind_deg());
     }
 
     private void setWeatherImage() {

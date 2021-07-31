@@ -6,8 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.bartlomiej_swies.controller.BaseController;
+import pl.bartlomiej_swies.controller.CurrentWeatherController;
 import pl.bartlomiej_swies.controller.DailyForecastController;
 import pl.bartlomiej_swies.controller.MainWindowController;
+import pl.bartlomiej_swies.model.CurrentWeatherData;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 
 import java.io.IOException;
@@ -19,10 +21,16 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
-    public VBox getDailyForecastWindow(DailyForecast dailyForecast) {
+    public VBox getDailyForecastView(DailyForecast dailyForecast) {
         BaseController controller = new DailyForecastController(this, "/view/DailyForecast.fxml", dailyForecast);
         VBox dailyForeCastview = (VBox) getloadedFXML(controller);
         return dailyForeCastview;
+    }
+
+    public VBox getCurrentWeatherView(CurrentWeatherData currentWeatherData) {
+        BaseController controller = new CurrentWeatherController(this, "/view/CurrentWeather.fxml", currentWeatherData);
+        VBox currentWeatherView = (VBox) getloadedFXML(controller);
+        return currentWeatherView;
     }
 
     private Parent getloadedFXML(BaseController baseController) {
