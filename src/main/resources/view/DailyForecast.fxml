@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="CENTER"
+      maxHeight="-Infinity"
+      maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="200.0"
+      prefWidth="150.0"
+      xmlns="http://javafx.com/javafx/16"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dayOfTheWeekLabel"
+               text="dzien">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="dateLabel"
+               text="data">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <HBox alignment="CENTER"
+              prefHeight="100.0"
+              prefWidth="200.0">
+            <children>
+                <Label fx:id="windLabel"
+                       text="Label">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </Label>
+                <ImageView fx:id="windImage"
+                           fitHeight="20.0"
+                           fitWidth="20.0"
+                           pickOnBounds="true"
+                           preserveRatio="true"/>
+            </children>
+        </HBox>
+        <ImageView fx:id="weatherImage"
+                   fitHeight="75.0"
+                   fitWidth="75.0"
+                   pickOnBounds="true"
+                   preserveRatio="true"/>
+        <Label fx:id="temperatureLabel"
+               text="Temperatura">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="pressureLabel"
+               text="cisnienie">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="humidityLabel"
+               text="wilgotnosc">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+    </children>
+</VBox>

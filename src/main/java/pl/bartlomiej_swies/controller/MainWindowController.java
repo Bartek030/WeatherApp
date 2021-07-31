@@ -2,14 +2,13 @@ package pl.bartlomiej_swies.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.AreaChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import pl.bartlomiej_swies.model.OneDayDataForDailyForecast;
+import javafx.scene.layout.VBox;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
+import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.net.URL;
@@ -17,93 +16,68 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
 
-    OpenWeatherMapApiQuery openWeatherMapApi;
+    private OpenWeatherMapApiQuery openWeatherMapApiQuery;
+    private String currentCityName;
+    private int numberOfNewCityForecast;
 
     @FXML
-    private TextField enteredCityTextField;
+    private VBox mainAppContainerVBox;
 
     @FXML
-    private ImageView currentWeatherImage;
-
-    @FXML
-    private Label currentWeatherTemperature;
-
-    @FXML
-    private Label currentWeatherDescription;
-
-    @FXML
-    private ImageView currentWeatherWindImage;
-
-    @FXML
-    private Label currentWeatherWindSpeed;
+    private VBox currentWeatherVBox;
 
     @FXML
     private HBox weeklyWeatherHBox;
 
     @FXML
-    private AreaChart<Number, Number> temperatureChartArea;
+    private HBox ButtonsHBox;
+
+    @FXML
+    private Label userCurrentLocationLabel;
 
     @FXML
     private Label errorLabel;
 
-    @FXML
-    void showForecastButton() {
-
-    }
-
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
-        openWeatherMapApi = new OpenWeatherMapApiQuery("Gorlice");
+        currentCityName = new Geolocation().getCityName();
+        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
+        numberOfNewCityForecast = 0;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCurrentWeatherData();
         setDailyWeatherForecast();
+        userCurrentLocationLabel.setText(currentCityName);
     }
 
     private void setCurrentWeatherData() {
-        setCurrentWeatherImage();
-        setCurrentWeatherTemperature();
-        setCurrentWeatherDescription();
-        setWeatherWindImage();
-        setCurrentWeatherWindSpeed();
+        currentWeatherVBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
     }
 
     private void setDailyWeatherForecast() {
-        int numberOfDays = openWeatherMapApi.getDailyForecastData().getDaily().size();
+        int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
 
         for(int i = 0; i < numberOfDays; i++) {
-            OneDayDataForDailyForecast oneDayDataForDailyForecast = new OneDayDataForDailyForecast(openWeatherMapApi.getDailyForecastData().getDaily().get(i));
-            weeklyWeatherHBox.getChildren().add(oneDayDataForDailyForecast.getWeatherData());
+            weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
         }
     }
 
-    private void setCurrentWeatherImage() {
-        String imageIcon = openWeatherMapApi.getCurrentWeatherData().getWeather().get(0).getIcon();
-        String imageSource = "http://openweathermap.org/img/wn/" + imageIcon + "@2x.png";
-        currentWeatherImage.setImage(new Image(imageSource));
+    @FXML
+    void addNewCityForecastButton() {
+        if (numberOfNewCityForecast < 3) {
+            int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
+            mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, getViewFactory().getNewCityForecastPanel());
+            numberOfNewCityForecast++;
+        }
     }
 
-    private void setCurrentWeatherTemperature() {
-        String temperature = openWeatherMapApi.getCurrentWeatherData().getMain().getTemp() + "\u00B0C";
-        currentWeatherTemperature.setText(temperature);
-    }
-
-    private void setCurrentWeatherDescription() {
-        String description = openWeatherMapApi.getCurrentWeatherData().getWeather().get(0).getDescription();
-        currentWeatherDescription.setText(description);
-    }
-
-    private void setWeatherWindImage() {
-        URL url = getClass().getResource("/view/img/arrow.png");
-        Image image = new Image(String.valueOf(url));
-        currentWeatherWindImage.setImage(image);
-        currentWeatherWindImage.setRotate(openWeatherMapApi.getCurrentWeatherData().getWind().getDeg());
-    }
-
-    private void setCurrentWeatherWindSpeed() {
-        String windSpeed = openWeatherMapApi.getCurrentWeatherData().getWind().getSpeed() + " m/s";
-        currentWeatherWindSpeed.setText(windSpeed);
+    @FXML
+    void deleteLastForecastButton() {
+        if(numberOfNewCityForecast > 0) {
+            int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
+            mainAppContainerVBox.getChildren().remove(indexOfButtonsHBox - 1);
+        }
     }
 }

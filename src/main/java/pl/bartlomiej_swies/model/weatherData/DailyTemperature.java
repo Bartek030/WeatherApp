@@ -10,12 +10,12 @@ public class DailyTemperature {
         this.night = night;
     }
 
-    public float getNight() {
-        return night;
+    public int getNight() {
+        return (int) night;
     }
 
-    public float getDay() {
-        return day;
+    public int getDay() {
+        return (int) day;
     }
 
 }
