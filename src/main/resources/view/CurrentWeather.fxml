@@ -6,25 +6,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="currentWeatherBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Label fx:id="cityNameLabel" text="miejscowosc">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="currentWeatherImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="currentWeatherTemperature" alignment="CENTER" contentDisplay="CENTER" text="Label">
                <font>
-                  <Font name="System Bold" size="40.0" />
+                  <Font name="Comic Sans MS Bold" size="40.0" />
                </font>
             </Label>
          </children>
       </HBox>
       <Label fx:id="currentWeatherDescription" prefHeight="25.0" text="Label">
          <font>
-            <Font size="20.0" />
+            <Font name="Comic Sans MS" size="20.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER">
          <children>
             <Label fx:id="currentWindLabel" alignment="CENTER" contentDisplay="CENTER" text="Label">
                <font>
@@ -36,12 +40,12 @@
       </HBox>
       <Label fx:id="currentWeatherPressure" prefHeight="25.0" text="Label">
          <font>
-            <Font size="15.0" />
+            <Font name="Comic Sans MS" size="15.0" />
          </font>
       </Label>
       <Label fx:id="currentWeatherHumidity" prefHeight="25.0" text="Label">
          <font>
-            <Font size="15.0" />
+            <Font name="Comic Sans MS" size="15.0" />
          </font>
       </Label>
    </children>

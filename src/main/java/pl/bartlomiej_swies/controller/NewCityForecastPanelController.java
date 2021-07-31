@@ -21,11 +21,12 @@ public class NewCityForecastPanelController extends BaseController {
 
     public NewCityForecastPanelController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
+        cityName = "";
     }
 
     @FXML
     void showNewCityForecastButton() {
-        if (!isForecastShowed || !cityName.equals(newCityTextField.getText())) {
+        if ((!isForecastShowed || !cityName.equals(newCityTextField.getText())) && !newCityTextField.getText().isEmpty()) {
             newCityForecastHBox.getChildren().clear();
             cityName = newCityTextField.getText();
             openWeatherMapApiQuery = new OpenWeatherMapApiQuery(cityName);

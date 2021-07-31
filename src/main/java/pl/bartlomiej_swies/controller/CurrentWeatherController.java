@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
+import pl.bartlomiej_swies.model.auxiliaryMethods.StringMethods;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.net.URL;
@@ -14,6 +15,9 @@ import java.util.ResourceBundle;
 public class CurrentWeatherController extends BaseController implements Initializable {
 
     private CurrentWeatherData currentWeatherData;
+
+    @FXML
+    private Label cityNameLabel;
 
     @FXML
     private ImageView currentWeatherImage;
@@ -43,6 +47,7 @@ public class CurrentWeatherController extends BaseController implements Initiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCityNameLabel();
         setCurrentWeatherImage();
         setCurrentWeatherTemperatureLabel();
         setCurrentWeatherDescriptionLabel();
@@ -52,6 +57,10 @@ public class CurrentWeatherController extends BaseController implements Initiali
         setCurrentWeatherHumidityLabel();
     }
 
+    private void setCityNameLabel() {
+        cityNameLabel.setText(currentWeatherData.getName().toUpperCase());
+    }
+
     private void setCurrentWeatherImage() {
         String imageIcon = currentWeatherData.getWeather().get(0).getIcon();
         String imageSource = "http://openweathermap.org/img/wn/" + imageIcon + "@2x.png";
@@ -59,11 +68,11 @@ public class CurrentWeatherController extends BaseController implements Initiali
     }
 
     private void setCurrentWeatherTemperatureLabel() {
-        currentWeatherTemperature.setText(currentWeatherData.getMain().getTemp() + " \u00B0C");
+        currentWeatherTemperature.setText(currentWeatherData.getMain().getTemp() + "\u00B0C");
     }
 
     private void setCurrentWeatherDescriptionLabel() {
-        currentWeatherDescription.setText(currentWeatherData.getWeather().get(0).getDescription());
+        currentWeatherDescription.setText(StringMethods.capitalizeFirstLetter(currentWeatherData.getWeather().get(0).getDescription()));
     }
 
     private void setCurrentWindLabel() {
