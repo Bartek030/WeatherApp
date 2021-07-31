@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import pl.bartlomiej_swies.model.auxiliaryMethods.StringMethods;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 import pl.bartlomiej_swies.view.ViewFactory;
 
@@ -62,7 +63,7 @@ public class DailyForecastController extends BaseController implements Initializ
         String dayOfTheWeek = new SimpleDateFormat("EEEE").format(date);
         String dateInStringFormat = new SimpleDateFormat("dd-MM-YYYY").format(date);
 
-        dayOfTheWeekLabel.setText(dayOfTheWeek);
+        dayOfTheWeekLabel.setText(StringMethods.capitalizeFirstLetter(dayOfTheWeek));
         dateLabel.setText(dateInStringFormat);
     }
 

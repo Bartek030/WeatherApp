@@ -3,14 +3,16 @@ package pl.bartlomiej_swies.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import pl.bartlomiej_swies.controller.*;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class ViewFactory {
 
@@ -56,6 +58,8 @@ public class ViewFactory {
 
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(getClass().getResource("/view/css/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

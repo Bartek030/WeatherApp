@@ -49,7 +49,7 @@ public class MainWindowController extends BaseController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCurrentWeatherData();
         setDailyWeatherForecast();
-        userCurrentLocationLabel.setText(currentCityName);
+        userCurrentLocationLabel.setText(currentCityName.toUpperCase());
     }
 
     private void setCurrentWeatherData() {

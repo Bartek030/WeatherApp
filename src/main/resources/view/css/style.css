@@ -1,0 +1,39 @@
+/* Main window styles */
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-image: url("../img/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: auto;
+    -fx-background-position: center center;
+    -fx-fit-to-width: true;
+}
+
+#mainTitle {
+    -fx-font-color: white;
+}
+
+#currentWeatherBox, #dailyForecastBox {
+    -fx-background-color: #ff8c1a;
+    -fx-background-radius: 15px;
+    -fx-padding: 2px;
+    -fx-border-insets: 2px;
+    -fx-background-insets: 2px;
+}
+
+#addButton {
+    -fx-background-color: #33cc33;
+    -fx-font-color: white;
+}
+
+#deleteButton {
+    -fx-background-color: #ff3300;
+    -fx-font-color: white;
+}
+
+#searchButton {
+    -fx-background-color: #ff8c1a;
+    -fx-font-color: white;
+}
