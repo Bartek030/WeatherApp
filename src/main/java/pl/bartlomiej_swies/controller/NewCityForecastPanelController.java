@@ -3,15 +3,15 @@ package pl.bartlomiej_swies.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 
 public class NewCityForecastPanelController extends BaseController {
 
-    OpenWeatherMapApiQuery openWeatherMapApiQuery;
+    private OpenWeatherMapApiQuery openWeatherMapApiQuery;
     private boolean isForecastShowed = false;
+    private String cityName;
 
     @FXML
     private HBox newCityForecastHBox;
@@ -25,8 +25,9 @@ public class NewCityForecastPanelController extends BaseController {
 
     @FXML
     void showNewCityForecastButton() {
-        if (!isForecastShowed) {
-            String cityName = newCityTextField.getText();
+        if (!isForecastShowed || !cityName.equals(newCityTextField.getText())) {
+            newCityForecastHBox.getChildren().clear();
+            cityName = newCityTextField.getText();
             openWeatherMapApiQuery = new OpenWeatherMapApiQuery(cityName);
             setCurrentWeatherData();
             setDailyWeatherForecast();

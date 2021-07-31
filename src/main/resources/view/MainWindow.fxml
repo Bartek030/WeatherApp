@@ -65,7 +65,12 @@
                                 <Insets />
                             </VBox.margin>
                         </HBox>
-                      <Button mnemonicParsing="false" onAction="#addNewCityForecastButton" prefHeight="25.0" prefWidth="950.0" text="Dodaj kolejne miasto" />
+                  <HBox fx:id="ButtonsHBox" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                            <Button mnemonicParsing="false" onAction="#addNewCityForecastButton" prefHeight="25.0" prefWidth="950.0" text="Dodaj kolejną prognozę" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteLastForecastButton" prefHeight="25.0" prefWidth="950.0" text="Usuń ostatnią prognozę" />
+                     </children>
+                  </HBox>
                       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" textFill="#ee0909">
                           <font>
                               <Font size="15.0" />

@@ -30,6 +30,9 @@ public class MainWindowController extends BaseController implements Initializabl
     private HBox weeklyWeatherHBox;
 
     @FXML
+    private HBox ButtonsHBox;
+
+    @FXML
     private Label userCurrentLocationLabel;
 
     @FXML
@@ -64,8 +67,17 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     void addNewCityForecastButton() {
         if (numberOfNewCityForecast < 3) {
-            mainAppContainerVBox.getChildren().add(3 + numberOfNewCityForecast, getViewFactory().getNewCityForecastPanel());
+            int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
+            mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, getViewFactory().getNewCityForecastPanel());
             numberOfNewCityForecast++;
+        }
+    }
+
+    @FXML
+    void deleteLastForecastButton() {
+        if(numberOfNewCityForecast > 0) {
+            int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
+            mainAppContainerVBox.getChildren().remove(indexOfButtonsHBox - 1);
         }
     }
 }
