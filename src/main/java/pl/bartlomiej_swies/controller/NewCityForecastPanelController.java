@@ -1,7 +1,6 @@
 package pl.bartlomiej_swies.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,9 +11,10 @@ import pl.bartlomiej_swies.view.ViewFactory;
 public class NewCityForecastPanelController extends BaseController {
 
     OpenWeatherMapApiQuery openWeatherMapApiQuery;
+    private boolean isForecastShowed = false;
 
     @FXML
-    private HBox newCiteForecastHBox;
+    private HBox newCityForecastHBox;
 
     @FXML
     private TextField newCityTextField;
@@ -25,21 +25,24 @@ public class NewCityForecastPanelController extends BaseController {
 
     @FXML
     void showNewCityForecastButton() {
-        String cityName = newCityTextField.getText();
-        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(cityName);
-        setCurrentWeatherData();
-        setDailyWeatherForecast();
+        if (!isForecastShowed) {
+            String cityName = newCityTextField.getText();
+            openWeatherMapApiQuery = new OpenWeatherMapApiQuery(cityName);
+            setCurrentWeatherData();
+            setDailyWeatherForecast();
+            isForecastShowed = true;
+        }
     }
 
     private void setCurrentWeatherData() {
-        newCiteForecastHBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
+        newCityForecastHBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
     }
 
     private void setDailyWeatherForecast() {
         int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
 
         for(int i = 0; i < numberOfDays; i++) {
-            newCiteForecastHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
+            newCityForecastHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
         }
     }
 }

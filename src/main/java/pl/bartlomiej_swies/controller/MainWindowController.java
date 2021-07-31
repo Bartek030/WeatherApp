@@ -64,11 +64,8 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     void addNewCityForecastButton() {
         if (numberOfNewCityForecast < 3) {
-            setEnterNewCityTextField();
+            mainAppContainerVBox.getChildren().add(3 + numberOfNewCityForecast, getViewFactory().getNewCityForecastPanel());
+            numberOfNewCityForecast++;
         }
-    }
-
-    private void setEnterNewCityTextField() {
-        mainAppContainerVBox.getChildren().add(getViewFactory().getNewCityForecastPanel());
     }
 }
