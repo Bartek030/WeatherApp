@@ -3,12 +3,10 @@ package pl.bartlomiej_swies.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import pl.bartlomiej_swies.controller.BaseController;
-import pl.bartlomiej_swies.controller.CurrentWeatherController;
-import pl.bartlomiej_swies.controller.DailyForecastController;
-import pl.bartlomiej_swies.controller.MainWindowController;
+import pl.bartlomiej_swies.controller.*;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 
@@ -31,6 +29,12 @@ public class ViewFactory {
         BaseController controller = new CurrentWeatherController(this, "/view/CurrentWeather.fxml", currentWeatherData);
         VBox currentWeatherView = (VBox) getloadedFXML(controller);
         return currentWeatherView;
+    }
+
+    public VBox getNewCityForecastPanel() {
+        BaseController controller = new NewCityForecastPanelController(this, "/view/NewCityForecastPanel.fxml");
+        VBox newCityForecastPanelView = (VBox) getloadedFXML(controller);
+        return newCityForecastPanelView;
     }
 
     private Parent getloadedFXML(BaseController baseController) {

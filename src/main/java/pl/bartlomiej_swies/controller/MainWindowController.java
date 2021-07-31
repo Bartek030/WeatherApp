@@ -2,6 +2,7 @@ package pl.bartlomiej_swies.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -15,8 +16,12 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
 
-    private OpenWeatherMapApiQuery openWeatherMapApi;
+    private OpenWeatherMapApiQuery openWeatherMapApiQuery;
     private String currentCityName;
+    private int numberOfNewCityForecast;
+
+    @FXML
+    private VBox mainAppContainerVBox;
 
     @FXML
     private VBox currentWeatherVBox;
@@ -33,7 +38,8 @@ public class MainWindowController extends BaseController implements Initializabl
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
         currentCityName = new Geolocation().getCityName();
-        openWeatherMapApi = new OpenWeatherMapApiQuery(currentCityName);
+        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
+        numberOfNewCityForecast = 0;
     }
 
     @Override
@@ -44,16 +50,25 @@ public class MainWindowController extends BaseController implements Initializabl
     }
 
     private void setCurrentWeatherData() {
-        currentWeatherVBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApi.getCurrentWeatherData()));
+        currentWeatherVBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
     }
 
     private void setDailyWeatherForecast() {
-        int numberOfDays = openWeatherMapApi.getDailyForecastData().getDaily().size();
+        int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
 
         for(int i = 0; i < numberOfDays; i++) {
-            weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApi.getDailyForecastData().getDaily().get(i)));
+            weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
         }
     }
 
+    @FXML
+    void addNewCityForecastButton() {
+        if (numberOfNewCityForecast < 3) {
+            setEnterNewCityTextField();
+        }
+    }
 
+    private void setEnterNewCityTextField() {
+        mainAppContainerVBox.getChildren().add(getViewFactory().getNewCityForecastPanel());
+    }
 }
