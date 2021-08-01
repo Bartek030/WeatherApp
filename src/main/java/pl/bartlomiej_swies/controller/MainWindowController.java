@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import pl.bartlomiej_swies.Config;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
@@ -41,18 +41,16 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private Button deleteLastForecastButton;
 
-    @FXML
-    private Label errorLabel;
-
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
-        currentCityName = new Geolocation().getCityName();
-        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
-        numberOfNewCityForecast = 0;
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        currentCityName = getUserLocation();
+        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
+        numberOfNewCityForecast = 0;
         setCurrentWeatherData();
         setDailyWeatherForecast();
         userCurrentLocationLabel.setText(currentCityName.toUpperCase());
@@ -68,6 +66,16 @@ public class MainWindowController extends BaseController implements Initializabl
         for(int i = 1; i < numberOfDays; i++) {
             weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
         }
+    }
+
+    private String getUserLocation() {
+        String cityName = new Geolocation().getCityName();
+        if(cityName != null) {
+            return cityName;
+        } else {
+            cityName = Config.DEFAULT_CITY_NAME;
+        }
+        return cityName;
     }
 
     @FXML

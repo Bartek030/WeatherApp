@@ -24,14 +24,14 @@ public class OpenWeatherMapApiQuery {
                 + "q=" + cityName
                 + "&units=metric"
                 + "&lang=pl"
-                + "&appid=" + Config.getOpenWeatherMapApiKey();
+                + "&appid=" + Config.OPEN_WEATHER_MAP_API_KEY;
         this.dailyWeatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?"
                 + "lat=" +	this.getCurrentWeatherData().getCoord().getLat()
                 + "&lon=" + this.getCurrentWeatherData().getCoord().getLon()
                 + "&units=metric"
                 + "&lang=pl"
                 + "&exclude=current,minutely,hourly,alerts"
-                + "&appid=" + Config.getOpenWeatherMapApiKey();
+                + "&appid=" + Config.OPEN_WEATHER_MAP_API_KEY;
     }
 
     public CurrentWeatherData getCurrentWeatherData() {
