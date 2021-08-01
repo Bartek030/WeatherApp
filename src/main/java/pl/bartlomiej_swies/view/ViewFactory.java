@@ -5,14 +5,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import pl.bartlomiej_swies.controller.*;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class ViewFactory {
 
@@ -55,12 +53,16 @@ public class ViewFactory {
 
     private void initializeStage(BaseController baseController) {
         Parent parent = getloadedFXML(baseController);
-
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
+        Image icon = new Image(getClass().getResourceAsStream("/view/img/sun.png"));
+
         scene.getStylesheets().clear();
         scene.getStylesheets().add(getClass().getResource("/view/css/style.css").toExternalForm());
+
         stage.setScene(scene);
+        stage.setTitle("Prognoza Pogody");
+        stage.getIcons().add(icon);
         stage.show();
     }
 }
