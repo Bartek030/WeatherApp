@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane id="mainContainer" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane id="mainContainer" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <content>
           <VBox fx:id="mainAppContainerVBox" alignment="TOP_CENTER">
               <children>
@@ -79,7 +79,7 @@
                   </HBox>
             <HBox fx:id="ButtonsHBox" alignment="CENTER" spacing="50.0">
                <children>
-                      <Button id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addNewCityForecastButton" text="Dodaj kolejną prognozę" textAlignment="CENTER">
+                      <Button id="addButton" fx:id="addNewCityForecastButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addNewCityForecastButtonAction" text="Dodaj kolejną prognozę" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -87,21 +87,19 @@
                         <Font name="Comic Sans MS" size="15.0" />
                      </font>
                   </Button>
-                  <Button id="deleteButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteLastForecastButton" text="Usuń ostatnią prognozę">
+                  <Button id="deleteButton" fx:id="deleteLastForecastButton" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteLastForecastButtonAction" text="Usuń ostatnią prognozę">
                      <font>
                         <Font name="Comic Sans MS" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </HBox>
-                <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" textFill="#ee0909">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
               </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

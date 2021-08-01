@@ -68,14 +68,17 @@ public class DailyForecastController extends BaseController implements Initializ
     }
 
     private void setWindSpeed() {
-        windLabel.setText("Wiatr " + dailyForecast.getWind_speed() + " m/s");
+        String windSpeed = "Wiatr " + dailyForecast.getWind_speed() + " m/s";
+        windLabel.setText(windSpeed);
     }
 
     private void setWindImage() {
         URL url = getClass().getResource("/view/img/arrow.png");
         Image image = new Image(String.valueOf(url));
+        int windDeg = dailyForecast.getWind_deg();
+
         windImage.setImage(image);
-        windImage.setRotate(dailyForecast.getWind_deg());
+        windImage.setRotate(windDeg);
     }
 
     private void setWeatherImage() {
@@ -85,14 +88,17 @@ public class DailyForecastController extends BaseController implements Initializ
     }
 
     private void setTemperatureLabel() {
-        temperatureLabel.setText("Temp.: " + dailyForecast.getTemp().getDay() + " (" + dailyForecast.getTemp().getNight() + ") \u00B0C");
+        String temperature = "Temp.: " + dailyForecast.getTemp().getDay() + " (" + dailyForecast.getTemp().getNight() + ") \u00B0C";
+        temperatureLabel.setText(temperature);
     }
 
     private void setPressureLabel() {
-        pressureLabel.setText("Ciśnienie: " + dailyForecast.getPressure() + " hPa");
+        String pressure = "Ciśnienie: " + dailyForecast.getPressure() + " hPa";
+        pressureLabel.setText(pressure);
     }
 
     private void setHumidityLabel() {
-        humidityLabel.setText("Wilgotność: " + dailyForecast.getHumidity() + " %");
+        String humidity = "Wilgotność: " + dailyForecast.getHumidity() + " %";
+        humidityLabel.setText(humidity);
     }
 }

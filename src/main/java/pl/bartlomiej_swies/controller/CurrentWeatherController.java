@@ -58,7 +58,8 @@ public class CurrentWeatherController extends BaseController implements Initiali
     }
 
     private void setCityNameLabel() {
-        cityNameLabel.setText(currentWeatherData.getName().toUpperCase());
+        String cityName = currentWeatherData.getName().toUpperCase();
+        cityNameLabel.setText(cityName);
     }
 
     private void setCurrentWeatherImage() {
@@ -68,29 +69,36 @@ public class CurrentWeatherController extends BaseController implements Initiali
     }
 
     private void setCurrentWeatherTemperatureLabel() {
-        currentWeatherTemperature.setText(currentWeatherData.getMain().getTemp() + "\u00B0C");
+        String temperature = currentWeatherData.getMain().getTemp() + "\u00B0C";
+        currentWeatherTemperature.setText(temperature);
     }
 
     private void setCurrentWeatherDescriptionLabel() {
-        currentWeatherDescription.setText(StringMethods.capitalizeFirstLetter(currentWeatherData.getWeather().get(0).getDescription()));
+        String description = StringMethods.capitalizeFirstLetter(currentWeatherData.getWeather().get(0).getDescription());
+        currentWeatherDescription.setText(description);
     }
 
     private void setCurrentWindLabel() {
-        currentWindLabel.setText("Wiatr " + currentWeatherData.getWind().getSpeed() + " m/s");
+        String windLabel = "Wiatr " + currentWeatherData.getWind().getSpeed() + " m/s";
+        currentWindLabel.setText(windLabel);
     }
 
     private void setCurrentWindImage() {
         URL url = getClass().getResource("/view/img/arrow.png");
         Image image = new Image(String.valueOf(url));
+        int windDeg = currentWeatherData.getWind().getDeg();
+
         currentWindImage.setImage(image);
-        currentWindImage.setRotate(currentWeatherData.getWind().getDeg());
+        currentWindImage.setRotate(windDeg);
     }
 
     private void setCurrentWeatherPressureLabel() {
-        currentWeatherPressure.setText("Ciśnienie: " + currentWeatherData.getMain().getPressure() + " hPa");
+        String pressureLabel = "Ciśnienie: " + currentWeatherData.getMain().getPressure() + " hPa";
+        currentWeatherPressure.setText(pressureLabel);
     }
 
     private void setCurrentWeatherHumidityLabel() {
-        currentWeatherHumidity.setText("Wilgotność: " + currentWeatherData.getMain().getHumidity() + " %");
+        String humidityLabel = "Wilgotność: " + currentWeatherData.getMain().getHumidity() + " %";
+        currentWeatherHumidity.setText(humidityLabel);
     }
 }
