@@ -6,11 +6,9 @@ import javafx.scene.layout.HBox;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
-
-public class NewCityForecastPanelController extends BaseController {
+public class NewCityForecastPanelController extends ForecastViewController {
 
     private OpenWeatherMapApiQuery openWeatherMapApiQuery;
-    private boolean isForecastShowed = false;
     private String cityName;
 
     @FXML
@@ -26,25 +24,12 @@ public class NewCityForecastPanelController extends BaseController {
 
     @FXML
     void showNewCityForecastButton() {
-        if ((!isForecastShowed || !cityName.equals(newCityTextField.getText())) && !newCityTextField.getText().isEmpty()) {
+        if ((!cityName.equals(newCityTextField.getText())) && !newCityTextField.getText().isEmpty()) {
             newCityForecastHBox.getChildren().clear();
             cityName = newCityTextField.getText();
             openWeatherMapApiQuery = new OpenWeatherMapApiQuery(cityName);
-            setCurrentWeatherData();
-            setDailyWeatherForecast();
-            isForecastShowed = true;
-        }
-    }
-
-    private void setCurrentWeatherData() {
-        newCityForecastHBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
-    }
-
-    private void setDailyWeatherForecast() {
-        int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
-
-        for(int i = 0; i < numberOfDays; i++) {
-            newCityForecastHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
+            setCurrentWeatherData(newCityForecastHBox, openWeatherMapApiQuery);
+            setDailyWeatherForecast(newCityForecastHBox, openWeatherMapApiQuery);
         }
     }
 }

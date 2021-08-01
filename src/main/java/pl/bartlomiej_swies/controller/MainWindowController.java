@@ -14,7 +14,7 @@ import pl.bartlomiej_swies.view.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainWindowController extends BaseController implements Initializable {
+public class MainWindowController extends ForecastViewController implements Initializable {
 
     private OpenWeatherMapApiQuery openWeatherMapApiQuery;
     private String currentCityName;
@@ -43,7 +43,6 @@ public class MainWindowController extends BaseController implements Initializabl
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
-
     }
 
     @Override
@@ -51,21 +50,9 @@ public class MainWindowController extends BaseController implements Initializabl
         currentCityName = getUserLocation();
         openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
         numberOfNewCityForecast = 0;
-        setCurrentWeatherData();
-        setDailyWeatherForecast();
+        setCurrentWeatherData(currentWeatherVBox, openWeatherMapApiQuery);
+        setDailyWeatherForecast(weeklyWeatherHBox, openWeatherMapApiQuery);
         userCurrentLocationLabel.setText(currentCityName.toUpperCase());
-    }
-
-    private void setCurrentWeatherData() {
-        currentWeatherVBox.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
-    }
-
-    private void setDailyWeatherForecast() {
-        int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
-
-        for(int i = 1; i < numberOfDays; i++) {
-            weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
-        }
     }
 
     private String getUserLocation() {
