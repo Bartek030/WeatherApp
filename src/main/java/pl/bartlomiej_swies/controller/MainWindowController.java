@@ -36,6 +36,12 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label userCurrentLocationLabel;
 
     @FXML
+    private Button addNewCityForecastButton;
+
+    @FXML
+    private Button deleteLastForecastButton;
+
+    @FXML
     private Label errorLabel;
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
@@ -59,25 +65,34 @@ public class MainWindowController extends BaseController implements Initializabl
     private void setDailyWeatherForecast() {
         int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
 
-        for(int i = 0; i < numberOfDays; i++) {
+        for(int i = 1; i < numberOfDays; i++) {
             weeklyWeatherHBox.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
         }
     }
 
     @FXML
-    void addNewCityForecastButton() {
+    void addNewCityForecastButtonAction() {
         if (numberOfNewCityForecast < 3) {
             int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
             mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, getViewFactory().getNewCityForecastPanel());
             numberOfNewCityForecast++;
+            deleteLastForecastButton.setDisable(false);
+            if (numberOfNewCityForecast == 3) {
+                addNewCityForecastButton.setDisable(true);
+            }
         }
     }
 
     @FXML
-    void deleteLastForecastButton() {
+    void deleteLastForecastButtonAction() {
         if(numberOfNewCityForecast > 0) {
             int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
             mainAppContainerVBox.getChildren().remove(indexOfButtonsHBox - 1);
+            numberOfNewCityForecast--;
+            addNewCityForecastButton.setDisable(false);
+            if(numberOfNewCityForecast == 0) {
+                deleteLastForecastButton.setDisable(true);
+            }
         }
     }
 }
