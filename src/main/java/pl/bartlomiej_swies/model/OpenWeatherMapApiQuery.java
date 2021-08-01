@@ -59,7 +59,6 @@ public class OpenWeatherMapApiQuery {
         URL url = new URL(stringForApiRequest);
         URLConnection urlConnection = url.openConnection();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             result.append(line);

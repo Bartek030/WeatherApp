@@ -9,10 +9,10 @@ public class DailyForecast {
     private int pressure;
     private int humidity;
     private float wind_speed;
-    private float wind_deg;
+    private int wind_deg;
     private List<Weather> weather;
 
-    public DailyForecast(long dt, DailyTemperature temp, int pressure, int humidity, float wind_speed, float wind_deg, List<Weather> weather) {
+    public DailyForecast(long dt, DailyTemperature temp, int pressure, int humidity, float wind_speed, int wind_deg, List<Weather> weather) {
         this.dt = dt;
         this.temp = temp;
         this.pressure = pressure;
@@ -42,7 +42,7 @@ public class DailyForecast {
         return wind_speed;
     }
 
-    public float getWind_deg() {
+    public int getWind_deg() {
         return wind_deg;
     }
 

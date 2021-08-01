@@ -14,8 +14,6 @@ public class Geolocation {
 
     public  String getCityName() {
         String ipAddress = getIpAddress();
-
-
         try {
             File database = streamToFile(databasePath);
             DatabaseReader databaseReader = new DatabaseReader.Builder(database).build();
@@ -28,25 +26,24 @@ public class Geolocation {
         return null;
     }
 
-    private  String getIpAddress(){
-        String ipAddres = "";
-        URL url = null;
+    private String getIpAddress(){
+        String ipAddress = "";
         try {
-            url = new URL("http://checkip.amazonaws.com/");
+            URL url = new URL("http://checkip.amazonaws.com/");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
-            ipAddres = bufferedReader.readLine();
+            ipAddress = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ipAddres;
+        return ipAddress;
     }
 
     private static File streamToFile(InputStream in) throws IOException {
         File tempFile = File.createTempFile("GeoLite2-City-temp", ".mmdb");
         tempFile.deleteOnExit();
-        try (FileOutputStream out = new FileOutputStream(tempFile)) {
-            in.transferTo(out);
-        }
+        FileOutputStream out = new FileOutputStream(tempFile);
+        in.transferTo(out);
+
         return tempFile;
     }
 }
