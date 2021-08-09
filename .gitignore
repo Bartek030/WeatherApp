@@ -2,3 +2,6 @@ target/
 out/
 plan/
 src/main/java/pl/bartlomiej_swies/Config_Template.java
+src/main/java/pl/bartlomiej_swies/Config.java
+src/main/java/pl/bartlomiej_swies/StarterApp.java
+dependency-reduced-pom.xml
