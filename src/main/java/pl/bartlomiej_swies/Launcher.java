@@ -5,12 +5,10 @@ import javafx.stage.Stage;
 
 import pl.bartlomiej_swies.view.ViewFactory;
 
-import java.io.IOException;
-
 public class Launcher extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
 
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.showMainWindow();
