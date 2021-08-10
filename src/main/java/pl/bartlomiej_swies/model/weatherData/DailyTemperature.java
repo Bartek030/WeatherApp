@@ -2,8 +2,8 @@ package pl.bartlomiej_swies.model.weatherData;
 
 public class DailyTemperature {
 
-    private float day;
-    private float night;
+    private final float day;
+    private final float night;
 
     public DailyTemperature(float day, float night) {
         this.day = day;

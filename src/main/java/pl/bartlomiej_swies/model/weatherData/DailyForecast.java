@@ -4,13 +4,13 @@ import java.util.List;
 
 public class DailyForecast {
 
-    private long dt;
-    private DailyTemperature temp;
-    private int pressure;
-    private int humidity;
-    private float wind_speed;
-    private int wind_deg;
-    private List<Weather> weather;
+    private final long dt;
+    private final DailyTemperature temp;
+    private final int pressure;
+    private final int humidity;
+    private final float wind_speed;
+    private final int wind_deg;
+    private final List<Weather> weather;
 
     public DailyForecast(long dt, DailyTemperature temp, int pressure, int humidity, float wind_speed, int wind_deg, List<Weather> weather) {
         this.dt = dt;

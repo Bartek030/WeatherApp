@@ -1,10 +1,10 @@
 package pl.bartlomiej_swies.model.weatherData;
 
 public class Weather {
-    private int id;
-    private String main;
-    private String description;
-    private String icon;
+    private final int id;
+    private final String main;
+    private final String description;
+    private final String icon;
 
     public Weather(int id, String main, String description, String icon) {
         this.id = id;
