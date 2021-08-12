@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import pl.bartlomiej_swies.Config;
+import pl.bartlomiej_swies.config.Config;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 

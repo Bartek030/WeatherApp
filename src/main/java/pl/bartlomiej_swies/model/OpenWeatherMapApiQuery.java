@@ -1,7 +1,8 @@
 package pl.bartlomiej_swies.model;
 
 import com.google.gson.Gson;
-import pl.bartlomiej_swies.Config;
+import pl.bartlomiej_swies.config.ApiRequestPrefixes;
+import pl.bartlomiej_swies.config.Config;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,11 +17,11 @@ public class OpenWeatherMapApiQuery {
 
     public CurrentWeatherData getCurrentWeatherData(String cityName) {
         try {
-            String currentWeatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?"
-                    + "q=" + cityName
-                    + "&units=metric"
-                    + "&lang=pl"
-                    + "&appid=" + Config.OPEN_WEATHER_MAP_API_KEY;
+            String currentWeatherApiUrl = ApiRequestPrefixes.CURRENT_WEATHER_URL_PREFIX
+                                        + ApiRequestPrefixes.CITY_NAME_PREFIX + cityName
+                                        + ApiRequestPrefixes.UNITS_PREFIX + Config.DEFAULT_UNITS
+                                        + ApiRequestPrefixes.LANGUAGE_PREFIX + Config.DEFAULT_LANGUAGE
+                                        + ApiRequestPrefixes.API_KEY_PREFIX + Config.OPEN_WEATHER_MAP_API_KEY;
 
             String jsonString = returnDataFromApi(currentWeatherApiUrl);
             return gson.fromJson(jsonString, CurrentWeatherData.class);
@@ -32,13 +33,13 @@ public class OpenWeatherMapApiQuery {
 
     public DailyForecastData getDailyForecastData(double lat, double lon) {
         try {
-            String dailyWeatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?"
-                    + "lat=" +	lat
-                    + "&lon=" + lon
-                    + "&units=metric"
-                    + "&lang=pl"
-                    + "&exclude=current,minutely,hourly,alerts"
-                    + "&appid=" + Config.OPEN_WEATHER_MAP_API_KEY;
+            String dailyWeatherApiUrl =   ApiRequestPrefixes.DAILY_FORECAST_URL_PREFIX
+                                        + ApiRequestPrefixes.LATITUDE_PREFIX +	lat
+                                        + ApiRequestPrefixes.LONGITUDE_PREFIX + lon
+                                        + ApiRequestPrefixes.UNITS_PREFIX + Config.DEFAULT_UNITS
+                                        + ApiRequestPrefixes.LANGUAGE_PREFIX + Config.DEFAULT_LANGUAGE
+                                        + ApiRequestPrefixes.EXCLUDED_ELEMENTS
+                                        + ApiRequestPrefixes.API_KEY_PREFIX + Config.OPEN_WEATHER_MAP_API_KEY;
 
             String jsonString = returnDataFromApi(dailyWeatherApiUrl);
             return gson.fromJson(jsonString, DailyForecastData.class);
