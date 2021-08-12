@@ -4,8 +4,8 @@ import pl.bartlomiej_swies.view.ViewFactory;
 
 public abstract class BaseController {
 
-    private ViewFactory viewFactory;
-    private String fxmlName;
+    private final ViewFactory viewFactory;
+    private final String fxmlName;
 
     public BaseController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;

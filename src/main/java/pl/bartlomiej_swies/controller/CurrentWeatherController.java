@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class CurrentWeatherController extends BaseController implements Initializable {
 
-    private CurrentWeatherData currentWeatherData;
+    private final CurrentWeatherData currentWeatherData;
 
     @FXML
     private Label cityNameLabel;
