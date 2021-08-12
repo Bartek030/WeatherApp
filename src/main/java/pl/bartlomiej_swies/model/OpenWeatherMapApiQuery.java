@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import java.net.ConnectException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -15,38 +17,30 @@ public class OpenWeatherMapApiQuery {
 
     private final Gson gson = new Gson();
 
-    public CurrentWeatherData getCurrentWeatherData(String cityName) {
-        try {
-            String currentWeatherApiUrl = ApiRequestPrefixes.CURRENT_WEATHER_URL_PREFIX
-                                        + ApiRequestPrefixes.CITY_NAME_PREFIX + cityName
-                                        + ApiRequestPrefixes.UNITS_PREFIX + Config.DEFAULT_UNITS
-                                        + ApiRequestPrefixes.LANGUAGE_PREFIX + Config.DEFAULT_LANGUAGE
-                                        + ApiRequestPrefixes.API_KEY_PREFIX + Config.OPEN_WEATHER_MAP_API_KEY;
+    public CurrentWeatherData getCurrentWeatherData(String cityName) throws IOException {
 
-            String jsonString = returnDataFromApi(currentWeatherApiUrl);
-            return gson.fromJson(jsonString, CurrentWeatherData.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        String currentWeatherApiUrl = ApiRequestPrefixes.CURRENT_WEATHER_URL_PREFIX
+                                    + ApiRequestPrefixes.CITY_NAME_PREFIX + cityName
+                                    + ApiRequestPrefixes.UNITS_PREFIX + Config.DEFAULT_UNITS
+                                    + ApiRequestPrefixes.LANGUAGE_PREFIX + Config.DEFAULT_LANGUAGE
+                                    + ApiRequestPrefixes.API_KEY_PREFIX + Config.OPEN_WEATHER_MAP_API_KEY;
+
+        String jsonString = returnDataFromApi(currentWeatherApiUrl);
+        return gson.fromJson(jsonString, CurrentWeatherData.class);
     }
 
-    public DailyForecastData getDailyForecastData(double lat, double lon) {
-        try {
-            String dailyWeatherApiUrl =   ApiRequestPrefixes.DAILY_FORECAST_URL_PREFIX
-                                        + ApiRequestPrefixes.LATITUDE_PREFIX +	lat
-                                        + ApiRequestPrefixes.LONGITUDE_PREFIX + lon
-                                        + ApiRequestPrefixes.UNITS_PREFIX + Config.DEFAULT_UNITS
-                                        + ApiRequestPrefixes.LANGUAGE_PREFIX + Config.DEFAULT_LANGUAGE
-                                        + ApiRequestPrefixes.EXCLUDED_ELEMENTS
-                                        + ApiRequestPrefixes.API_KEY_PREFIX + Config.OPEN_WEATHER_MAP_API_KEY;
+    public DailyForecastData getDailyForecastData(double lat, double lon) throws IOException {
 
-            String jsonString = returnDataFromApi(dailyWeatherApiUrl);
-            return gson.fromJson(jsonString, DailyForecastData.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        String dailyWeatherApiUrl =   ApiRequestPrefixes.DAILY_FORECAST_URL_PREFIX
+                                    + ApiRequestPrefixes.LATITUDE_PREFIX +	lat
+                                    + ApiRequestPrefixes.LONGITUDE_PREFIX + lon
+                                    + ApiRequestPrefixes.UNITS_PREFIX + Config.DEFAULT_UNITS
+                                    + ApiRequestPrefixes.LANGUAGE_PREFIX + Config.DEFAULT_LANGUAGE
+                                    + ApiRequestPrefixes.EXCLUDED_ELEMENTS
+                                    + ApiRequestPrefixes.API_KEY_PREFIX + Config.OPEN_WEATHER_MAP_API_KEY;
+
+        String jsonString = returnDataFromApi(dailyWeatherApiUrl);
+        return gson.fromJson(jsonString, DailyForecastData.class);
     }
 
     private String returnDataFromApi(String stringForApiRequest) throws IOException {

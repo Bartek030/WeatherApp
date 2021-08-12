@@ -6,6 +6,8 @@ import pl.bartlomiej_swies.model.DailyForecastData;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
+import java.io.IOException;
+
 public abstract class ForecastViewController extends BaseController {
 
     protected OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery();
@@ -17,10 +19,15 @@ public abstract class ForecastViewController extends BaseController {
     }
 
     protected void setWeatherData(Pane pane, String cityName) {
-        currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
-        dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(currentWeatherData.getCoord().getLat(), currentWeatherData.getCoord().getLon());
-        setCurrentWeatherData(pane, currentWeatherData);
-        setDailyWeatherForecast(pane, dailyForecastData);
+        try {
+            currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
+            dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(currentWeatherData.getCoord().getLat(), currentWeatherData.getCoord().getLon());
+            setCurrentWeatherData(pane, currentWeatherData);
+            setDailyWeatherForecast(pane, dailyForecastData);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // POKAZ OKNO Z BLEDEM
+        }
     }
 
     private void setCurrentWeatherData(Pane pane, CurrentWeatherData currentWeatherData) {

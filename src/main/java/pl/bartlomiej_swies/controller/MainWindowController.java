@@ -48,6 +48,7 @@ public class MainWindowController extends ForecastViewController implements Init
         currentCityName = getUserLocation();
         numberOfNewCityForecast = 0;
         setWeatherData(weeklyWeatherHBox, currentCityName);
+        userCurrentLocationLabel.setText(currentCityName.toUpperCase());
     }
 
     private String getUserLocation() {
