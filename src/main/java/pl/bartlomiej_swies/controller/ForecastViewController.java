@@ -1,23 +1,36 @@
 package pl.bartlomiej_swies.controller;
 
 import javafx.scene.layout.Pane;
+import pl.bartlomiej_swies.model.CurrentWeatherData;
+import pl.bartlomiej_swies.model.DailyForecastData;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 public abstract class ForecastViewController extends BaseController {
 
+    protected OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery();
+    protected CurrentWeatherData currentWeatherData;
+    protected DailyForecastData dailyForecastData;
+
     public ForecastViewController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
     }
 
-    protected void setCurrentWeatherData(Pane pane, OpenWeatherMapApiQuery openWeatherMapApiQuery) {
-        pane.getChildren().add(getViewFactory().getCurrentWeatherView(openWeatherMapApiQuery.getCurrentWeatherData()));
+    protected void setWeatherData(Pane pane, String cityName) {
+        currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
+        dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(currentWeatherData.getCoord().getLat(), currentWeatherData.getCoord().getLon());
+        setCurrentWeatherData(pane, currentWeatherData);
+        setDailyWeatherForecast(pane, dailyForecastData);
     }
 
-    protected void setDailyWeatherForecast(Pane pane, OpenWeatherMapApiQuery openWeatherMapApiQuery) {
-        int numberOfDays = openWeatherMapApiQuery.getDailyForecastData().getDaily().size();
+    private void setCurrentWeatherData(Pane pane, CurrentWeatherData currentWeatherData) {
+        pane.getChildren().add(getViewFactory().getCurrentWeatherView(currentWeatherData));
+    }
+
+    private void setDailyWeatherForecast(Pane pane, DailyForecastData dailyForecastData) {
+        int numberOfDays = dailyForecastData.getDaily().size();
         for(int i = 1; i < numberOfDays; i++) {
-            pane.getChildren().add(getViewFactory().getDailyForecastView(openWeatherMapApiQuery.getDailyForecastData().getDaily().get(i)));
+            pane.getChildren().add(getViewFactory().getDailyForecastView(dailyForecastData.getDaily().get(i)));
         }
     }
 }

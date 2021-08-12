@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.bartlomiej_swies.Config;
-import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 
@@ -16,7 +15,6 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends ForecastViewController implements Initializable {
 
-    private OpenWeatherMapApiQuery openWeatherMapApiQuery;
     private String currentCityName;
     private int numberOfNewCityForecast;
 
@@ -48,11 +46,8 @@ public class MainWindowController extends ForecastViewController implements Init
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currentCityName = getUserLocation();
-        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
         numberOfNewCityForecast = 0;
-        setCurrentWeatherData(currentWeatherVBox, openWeatherMapApiQuery);
-        setDailyWeatherForecast(weeklyWeatherHBox, openWeatherMapApiQuery);
-        userCurrentLocationLabel.setText(currentCityName.toUpperCase());
+        setWeatherData(weeklyWeatherHBox, currentCityName);
     }
 
     private String getUserLocation() {
