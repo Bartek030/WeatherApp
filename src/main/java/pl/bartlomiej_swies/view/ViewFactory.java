@@ -19,6 +19,11 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
+    public void showMessageWindow() {
+        BaseController controller = new MainWindowController(this, "/view/MessageWindow.fxml");
+        initializeStage(controller);
+    }
+
     public VBox getDailyForecastView(DailyForecast dailyForecast) {
         BaseController controller = new DailyForecastController(this, "/view/DailyForecast.fxml", dailyForecast);
         VBox dailyForeCastview = (VBox) getloadedFXML(controller);
