@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class MessageWindowController extends BaseController implements Initializable {
 
-    private String message;
+    private final String message;
 
     @FXML
     private Label messageLabel;
@@ -29,10 +29,6 @@ public class MessageWindowController extends BaseController implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setMessage(message);
-    }
-
-    private void setMessage(String message) {
         messageLabel.setText(message);
     }
 }

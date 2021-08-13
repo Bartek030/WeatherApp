@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends ForecastViewController implements Initializable {
 
-    private String currentCityName;
     private int numberOfNewCityForecast;
 
     @FXML
@@ -45,7 +44,7 @@ public class MainWindowController extends ForecastViewController implements Init
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        currentCityName = getUserLocation();
+        String currentCityName = getUserLocation();
         numberOfNewCityForecast = 0;
         setWeatherData(weeklyWeatherHBox, currentCityName);
         userCurrentLocationLabel.setText(currentCityName.toUpperCase());

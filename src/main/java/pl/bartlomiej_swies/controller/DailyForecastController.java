@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class DailyForecastController extends BaseController implements Initializable {
 
-    private DailyForecast dailyForecast;
+    private final DailyForecast dailyForecast;
 
     @FXML
     private Label dayOfTheWeekLabel;

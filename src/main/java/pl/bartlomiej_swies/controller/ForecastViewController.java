@@ -10,18 +10,15 @@ import java.io.IOException;
 
 public abstract class ForecastViewController extends BaseController {
 
-    protected OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery();
-    protected CurrentWeatherData currentWeatherData;
-    protected DailyForecastData dailyForecastData;
-
     public ForecastViewController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
     }
 
     protected void setWeatherData(Pane pane, String cityName) {
         try {
-            currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
-            dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(currentWeatherData.getCoord().getLat(), currentWeatherData.getCoord().getLon());
+            OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery();
+            CurrentWeatherData currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
+            DailyForecastData dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(currentWeatherData.getCoord().getLat(), currentWeatherData.getCoord().getLon());
             setCurrentWeatherData(pane, currentWeatherData);
             setDailyWeatherForecast(pane, dailyForecastData);
         } catch (IOException e) {
