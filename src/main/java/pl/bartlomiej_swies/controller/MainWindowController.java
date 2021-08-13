@@ -65,7 +65,7 @@ public class MainWindowController extends ForecastViewController implements Init
     void addNewCityForecastButtonAction() {
         if (numberOfNewCityForecast < 3) {
             int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
-            mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, getViewFactory().getNewCityForecastPanel());
+            mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, viewFactory.getNewCityForecastPanel());
             numberOfNewCityForecast++;
             deleteLastForecastButton.setDisable(false);
             if (numberOfNewCityForecast == 3) {

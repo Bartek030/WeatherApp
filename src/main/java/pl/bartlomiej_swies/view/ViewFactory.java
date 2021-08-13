@@ -16,12 +16,12 @@ public class ViewFactory {
 
     public void showMainWindow() {
         BaseController controller = new MainWindowController(this, "/view/MainWindow.fxml");
-        initializeStage(controller);
+        initializeMainStage(controller);
     }
 
-    public void showMessageWindow() {
-        BaseController controller = new MainWindowController(this, "/view/MessageWindow.fxml");
-        initializeStage(controller);
+    public void showMessageWindow(String message) {
+        BaseController controller = new MessageWindowController(this, "/view/MessageWindow.fxml", message);
+        initializeMessageStage(controller);
     }
 
     public VBox getDailyForecastView(DailyForecast dailyForecast) {
@@ -42,21 +42,7 @@ public class ViewFactory {
         return newCityForecastPanelView;
     }
 
-    private Parent getloadedFXML(BaseController baseController) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(baseController.getFxmlName()));
-        fxmlLoader.setController(baseController);
-        Parent parent;
-
-        try {
-            parent = fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return parent;
-    }
-
-    private void initializeStage(BaseController baseController) {
+    private void initializeMainStage(BaseController baseController) {
         Parent parent = getloadedFXML(baseController);
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
@@ -69,5 +55,28 @@ public class ViewFactory {
         stage.setTitle("Prognoza Pogody");
         stage.getIcons().add(icon);
         stage.show();
+    }
+
+    private void initializeMessageStage(BaseController baseController) {
+        Parent parent = getloadedFXML(baseController);
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private Parent getloadedFXML(BaseController baseController) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(baseController.getFxmlName()));
+        fxmlLoader.setController(baseController);
+        Parent parent;
+
+        try {
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return parent;
     }
 }

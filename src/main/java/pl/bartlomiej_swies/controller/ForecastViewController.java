@@ -31,13 +31,13 @@ public abstract class ForecastViewController extends BaseController {
     }
 
     private void setCurrentWeatherData(Pane pane, CurrentWeatherData currentWeatherData) {
-        pane.getChildren().add(getViewFactory().getCurrentWeatherView(currentWeatherData));
+        pane.getChildren().add(viewFactory.getCurrentWeatherView(currentWeatherData));
     }
 
     private void setDailyWeatherForecast(Pane pane, DailyForecastData dailyForecastData) {
         int numberOfDays = dailyForecastData.getDaily().size();
         for(int i = 1; i < numberOfDays; i++) {
-            pane.getChildren().add(getViewFactory().getDailyForecastView(dailyForecastData.getDaily().get(i)));
+            pane.getChildren().add(viewFactory.getDailyForecastView(dailyForecastData.getDaily().get(i)));
         }
     }
 }

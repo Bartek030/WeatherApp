@@ -4,7 +4,7 @@ import pl.bartlomiej_swies.view.ViewFactory;
 
 public abstract class BaseController {
 
-    private final ViewFactory viewFactory;
+    protected final ViewFactory viewFactory;
     private final String fxmlName;
 
     public BaseController(ViewFactory viewFactory, String fxmlName) {
@@ -14,9 +14,5 @@ public abstract class BaseController {
 
     public String getFxmlName() {
         return fxmlName;
-    }
-
-    public ViewFactory getViewFactory() {
-        return viewFactory;
     }
 }
