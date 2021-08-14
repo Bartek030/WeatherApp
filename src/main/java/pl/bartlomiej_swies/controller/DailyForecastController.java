@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import pl.bartlomiej_swies.config.LabelsDescription;
+import pl.bartlomiej_swies.model.auxiliaryMethods.DateMethods;
 import pl.bartlomiej_swies.model.auxiliaryMethods.ImageResolver;
 import pl.bartlomiej_swies.model.auxiliaryMethods.StringMethods;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
@@ -13,7 +14,11 @@ import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DailyForecastController extends BaseController implements Initializable {
@@ -61,9 +66,9 @@ public class DailyForecastController extends BaseController implements Initializ
     }
 
     private void setDateAndDayOfTheWeekLabels() {
-        Date date = new Date(dailyForecast.getDt() * 1000);
-        String dayOfTheWeek = new SimpleDateFormat("EEEE").format(date);
-        String dateInStringFormat = new SimpleDateFormat("dd-MM-YYYY").format(date);
+        long dateInMilliseconds = dailyForecast.getDt() * 1000; // Seconds to milliseconds
+        String dayOfTheWeek = DateMethods.getDayOfTheWeekFromNumberOfMillis(dateInMilliseconds);
+        String dateInStringFormat = DateMethods.getDateFromNumberOfMillis(dateInMilliseconds);
 
         dayOfTheWeekLabel.setText(StringMethods.capitalizeFirstLetter(dayOfTheWeek));
         dateLabel.setText(dateInStringFormat);
