@@ -5,7 +5,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import pl.bartlomiej_swies.config.LabelsDescription;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
+import pl.bartlomiej_swies.model.auxiliaryMethods.ImageResolver;
 import pl.bartlomiej_swies.model.auxiliaryMethods.StringMethods;
 import pl.bartlomiej_swies.view.ViewFactory;
 
@@ -63,13 +65,12 @@ public class CurrentWeatherController extends BaseController implements Initiali
     }
 
     private void setCurrentWeatherImage() {
-        String imageIcon = currentWeatherData.getWeather().get(0).getIcon();
-        String imageSource = "http://openweathermap.org/img/wn/" + imageIcon + "@2x.png";
-        currentWeatherImage.setImage(new Image(imageSource));
+        Image image = ImageResolver.getWeatherIcon(currentWeatherData.getWeather().get(0).getIcon());
+        currentWeatherImage.setImage(image);
     }
 
     private void setCurrentWeatherTemperatureLabel() {
-        String temperature = currentWeatherData.getMain().getTemp() + "\u00B0C";
+        String temperature = currentWeatherData.getMain().getTemp() + LabelsDescription.TEMPERATURE_UNIT;
         currentWeatherTemperature.setText(temperature);
     }
 
@@ -79,12 +80,12 @@ public class CurrentWeatherController extends BaseController implements Initiali
     }
 
     private void setCurrentWindLabel() {
-        String windLabel = "Wiatr " + currentWeatherData.getWind().getSpeed() + " m/s";
+        String windLabel = LabelsDescription.WIND_LABEL + currentWeatherData.getWind().getSpeed() + LabelsDescription.WIND_UNIT;
         currentWindLabel.setText(windLabel);
     }
 
     private void setCurrentWindImage() {
-        URL url = getClass().getResource("/view/img/arrow.png");
+        URL url = getClass().getResource(ImageResolver.ARROW_IMAGE_PATH);
         Image image = new Image(String.valueOf(url));
         int windDeg = currentWeatherData.getWind().getDeg();
 
@@ -93,12 +94,12 @@ public class CurrentWeatherController extends BaseController implements Initiali
     }
 
     private void setCurrentWeatherPressureLabel() {
-        String pressureLabel = "Ciśnienie: " + currentWeatherData.getMain().getPressure() + " hPa";
+        String pressureLabel = LabelsDescription.PRESSURE_LABEL + currentWeatherData.getMain().getPressure() + LabelsDescription.PRESSURE_UNIT;
         currentWeatherPressure.setText(pressureLabel);
     }
 
     private void setCurrentWeatherHumidityLabel() {
-        String humidityLabel = "Wilgotność: " + currentWeatherData.getMain().getHumidity() + " %";
+        String humidityLabel = LabelsDescription.HUMIDITY_LABEL + currentWeatherData.getMain().getHumidity() + LabelsDescription.HUMIDITY_UNIT;
         currentWeatherHumidity.setText(humidityLabel);
     }
 }

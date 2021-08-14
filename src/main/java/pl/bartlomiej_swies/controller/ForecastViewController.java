@@ -18,7 +18,10 @@ public abstract class ForecastViewController extends BaseController {
         try {
             OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery();
             CurrentWeatherData currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
-            DailyForecastData dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(currentWeatherData.getCoord().getLat(), currentWeatherData.getCoord().getLon());
+            DailyForecastData dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(
+                    currentWeatherData.getCoord().getLat(),
+                    currentWeatherData.getCoord().getLon()
+            );
             setCurrentWeatherData(pane, currentWeatherData);
             setDailyWeatherForecast(pane, dailyForecastData);
         } catch (IOException e) {

@@ -9,4 +9,5 @@ module pl.bartlomiej_swies {
     opens pl.bartlomiej_swies.controller;
     opens pl.bartlomiej_swies.model;
     opens pl.bartlomiej_swies.config;
+    opens pl.bartlomiej_swies.model.auxiliaryMethods;
 }
