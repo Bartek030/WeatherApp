@@ -24,9 +24,6 @@ public class MainWindowController extends ForecastViewController implements Init
     private VBox mainAppContainerVBox;
 
     @FXML
-    private VBox currentWeatherVBox;
-
-    @FXML
     private HBox weeklyWeatherHBox;
 
     @FXML

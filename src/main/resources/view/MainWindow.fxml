@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane id="mainContainer" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane id="mainContainer" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <content>
           <VBox fx:id="mainAppContainerVBox" alignment="TOP_CENTER">
               <children>
@@ -64,15 +64,7 @@
                   </Label>
                       </children>
                   </HBox>
-                  <HBox>
-                      <children>
-                          <VBox fx:id="currentWeatherVBox" />
-                          <VBox id="vboxcontainer" alignment="TOP_CENTER" prefHeight="300.0" HBox.hgrow="ALWAYS">
-                              <children>
-                                  <HBox fx:id="weeklyWeatherHBox" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
-                              </children>
-                          </VBox>
-                      </children>
+                  <HBox fx:id="weeklyWeatherHBox" alignment="TOP_CENTER">
                       <VBox.margin>
                           <Insets />
                       </VBox.margin>

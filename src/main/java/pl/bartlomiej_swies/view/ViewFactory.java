@@ -62,7 +62,9 @@ public class ViewFactory {
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
 
+        stage.setResizable(false);
         stage.setAlwaysOnTop(true);
+        stage.setTitle("Informacja");
         stage.setScene(scene);
         stage.show();
     }
