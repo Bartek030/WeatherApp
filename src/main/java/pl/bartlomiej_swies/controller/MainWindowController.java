@@ -52,13 +52,12 @@ public class MainWindowController extends ForecastViewController implements Init
 
     private String getUserLocation() {
         try {
-            String cityName = new Geolocation().getCityName();
-            return cityName;
+            return new Geolocation().getCityName();
         } catch (IOException | GeoIp2Exception e) {
             e.printStackTrace();
             viewFactory.showMessageWindow(MessageLabels.USER_LOCATION_INACCESSIBLE);
+            return Config.DEFAULT_CITY_NAME;
         }
-        return null;
     }
 
     @FXML
@@ -81,7 +80,7 @@ public class MainWindowController extends ForecastViewController implements Init
             mainAppContainerVBox.getChildren().remove(indexOfButtonsHBox - 1);
             numberOfNewCityForecast--;
             addNewCityForecastButton.setDisable(false);
-            if(numberOfNewCityForecast == 0) {
+            if (numberOfNewCityForecast == 0) {
                 deleteLastForecastButton.setDisable(true);
             }
         }

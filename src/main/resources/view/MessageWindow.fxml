@@ -11,7 +11,7 @@
     <children>
         <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" text="Label">
             <font>
-                <Font size="15.0" />
+                <Font name="Comic Sans MS" size="15.0" />
             </font>
             <VBox.margin>
                 <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
@@ -23,6 +23,9 @@
          </VBox.margin>
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font></Button>
     </children>
 </VBox>

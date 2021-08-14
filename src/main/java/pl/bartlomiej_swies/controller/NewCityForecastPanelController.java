@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class NewCityForecastPanelController extends ForecastViewController implements Initializable {
 
-    private String cityName = "";
+    private String cityName;
 
     @FXML
     private HBox newCityForecastHBox;
@@ -26,6 +26,7 @@ public class NewCityForecastPanelController extends ForecastViewController imple
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        cityName = "";
         newCityForecastHBox.setAlignment(Pos.TOP_CENTER);
     }
 
@@ -35,6 +36,9 @@ public class NewCityForecastPanelController extends ForecastViewController imple
             newCityForecastHBox.getChildren().clear();
             cityName = newCityTextField.getText();
             setWeatherData(newCityForecastHBox, cityName);
+        } else {
+            cityName = "";
+            newCityTextField.setText("");
         }
     }
 
