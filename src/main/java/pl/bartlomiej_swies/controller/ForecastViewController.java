@@ -1,6 +1,7 @@
 package pl.bartlomiej_swies.controller;
 
 import javafx.scene.layout.Pane;
+import pl.bartlomiej_swies.config.MessageLabels;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
 import pl.bartlomiej_swies.model.DailyForecastData;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
@@ -26,7 +27,7 @@ public abstract class ForecastViewController extends BaseController {
             setDailyWeatherForecast(pane, dailyForecastData);
         } catch (IOException e) {
             e.printStackTrace();
-            // POKAZ OKNO Z BLEDEM
+            viewFactory.showMessageWindow(MessageLabels.NO_RESULTS_FROM_API);
         }
     }
 

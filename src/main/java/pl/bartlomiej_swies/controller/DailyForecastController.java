@@ -13,12 +13,6 @@ import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DailyForecastController extends BaseController implements Initializable {

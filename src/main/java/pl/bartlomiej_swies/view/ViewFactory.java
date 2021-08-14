@@ -62,6 +62,7 @@ public class ViewFactory {
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
 
+        stage.setAlwaysOnTop(true);
         stage.setScene(scene);
         stage.show();
     }
