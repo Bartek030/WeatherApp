@@ -6,4 +6,6 @@ public class Config {
     public static final String DEFAULT_CITY_NAME = "Kraków";
     public static final String DEFAULT_UNITS = "metric";
     public static final String DEFAULT_LANGUAGE = "pl";
+    public static final int MAX_NUMBER_OF_NEW_CITY_FORECASTS = 3;
+
 }
