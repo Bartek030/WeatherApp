@@ -1,5 +1,6 @@
 package pl.bartlomiej_swies.controller;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.bartlomiej_swies.config.Config;
+import pl.bartlomiej_swies.config.MessageLabels;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,11 +54,14 @@ public class MainWindowController extends ForecastViewController implements Init
     }
 
     private String getUserLocation() {
-        String cityName = new Geolocation().getCityName();
-        if (cityName == null) {
-            return Config.DEFAULT_CITY_NAME;
+        try {
+            String cityName = new Geolocation().getCityName();
+            return cityName;
+        } catch (IOException | GeoIp2Exception e) {
+            e.printStackTrace();
+            viewFactory.showMessageWindow(MessageLabels.USER_LOCATION_INACCESSIBLE);
         }
-        return cityName;
+        return null;
     }
 
     @FXML
