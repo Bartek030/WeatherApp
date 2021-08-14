@@ -1,8 +1,8 @@
 package pl.bartlomiej_swies.model.weatherData;
 
 public class Coordinates {
-    private double lon;
-    private double lat;
+    private final double lon;
+    private final double lat;
 
     public Coordinates(float lat, float lon) {
         this.lat = lat;

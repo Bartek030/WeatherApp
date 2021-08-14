@@ -1,8 +1,8 @@
 package pl.bartlomiej_swies.model.weatherData;
 
 public class WindConditions {
-    private float speed;
-    private int deg;
+    private final float speed;
+    private final int deg;
 
     public WindConditions(float speed, int deg) {
         this.speed = speed;

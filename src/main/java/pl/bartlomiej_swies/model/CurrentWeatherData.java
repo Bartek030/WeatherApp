@@ -6,11 +6,11 @@ import java.util.List;
 
 public class CurrentWeatherData {
 
-    private Coordinates coord;
-    private List<Weather> weather;
-    private MainConditions main;
-    private WindConditions wind;
-    private String name;
+    private final Coordinates coord;
+    private final List<Weather> weather;
+    private final MainConditions main;
+    private final WindConditions wind;
+    private final String name;
 
     public CurrentWeatherData(Coordinates coord, List<Weather> weather, MainConditions main, WindConditions wind, String name) {
         this.coord = coord;

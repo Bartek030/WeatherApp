@@ -5,18 +5,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import pl.bartlomiej_swies.config.LabelsDescription;
+import pl.bartlomiej_swies.model.auxiliaryMethods.DateMethods;
+import pl.bartlomiej_swies.model.auxiliaryMethods.ImageResolver;
 import pl.bartlomiej_swies.model.auxiliaryMethods.StringMethods;
 import pl.bartlomiej_swies.model.weatherData.DailyForecast;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DailyForecastController extends BaseController implements Initializable {
 
-    private DailyForecast dailyForecast;
+    private final DailyForecast dailyForecast;
 
     @FXML
     private Label dayOfTheWeekLabel;
@@ -59,21 +60,21 @@ public class DailyForecastController extends BaseController implements Initializ
     }
 
     private void setDateAndDayOfTheWeekLabels() {
-        Date date = new Date(dailyForecast.getDt() * 1000);
-        String dayOfTheWeek = new SimpleDateFormat("EEEE").format(date);
-        String dateInStringFormat = new SimpleDateFormat("dd-MM-YYYY").format(date);
+        long dateInMilliseconds = dailyForecast.getDt() * 1000; // Seconds to milliseconds
+        String dayOfTheWeek = DateMethods.getDayOfTheWeekFromNumberOfMillis(dateInMilliseconds);
+        String dateInStringFormat = DateMethods.getDateFromNumberOfMillis(dateInMilliseconds);
 
         dayOfTheWeekLabel.setText(StringMethods.capitalizeFirstLetter(dayOfTheWeek));
         dateLabel.setText(dateInStringFormat);
     }
 
     private void setWindSpeed() {
-        String windSpeed = "Wiatr " + dailyForecast.getWind_speed() + " m/s";
+        String windSpeed = LabelsDescription.WIND_LABEL + dailyForecast.getWind_speed() + LabelsDescription.WIND_UNIT;
         windLabel.setText(windSpeed);
     }
 
     private void setWindImage() {
-        URL url = getClass().getResource("/view/img/arrow.png");
+        URL url = getClass().getResource(ImageResolver.ARROW_IMAGE_PATH);
         Image image = new Image(String.valueOf(url));
         int windDeg = dailyForecast.getWind_deg();
 
@@ -82,23 +83,23 @@ public class DailyForecastController extends BaseController implements Initializ
     }
 
     private void setWeatherImage() {
-        String imageIcon = dailyForecast.getWeather().get(0).getIcon();
-        String imageSource = "http://openweathermap.org/img/wn/" + imageIcon + "@2x.png";
-        weatherImage.setImage(new Image(imageSource));
+        Image image = ImageResolver.getWeatherIcon(dailyForecast.getWeather().get(0).getIcon());
+        weatherImage.setImage(image);
     }
 
     private void setTemperatureLabel() {
-        String temperature = "Temp.: " + dailyForecast.getTemp().getDay() + " (" + dailyForecast.getTemp().getNight() + ") \u00B0C";
+        String temperature = LabelsDescription.TEMPERATURE_LABEL + dailyForecast.getTemp().getDay()
+                            + " (" + dailyForecast.getTemp().getNight() + ") " + LabelsDescription.TEMPERATURE_UNIT;
         temperatureLabel.setText(temperature);
     }
 
     private void setPressureLabel() {
-        String pressure = "Ciśnienie: " + dailyForecast.getPressure() + " hPa";
+        String pressure = LabelsDescription.PRESSURE_LABEL + dailyForecast.getPressure() + LabelsDescription.PRESSURE_UNIT;
         pressureLabel.setText(pressure);
     }
 
     private void setHumidityLabel() {
-        String humidity = "Wilgotność: " + dailyForecast.getHumidity() + " %";
+        String humidity = LabelsDescription.HUMIDITY_LABEL + dailyForecast.getHumidity() + LabelsDescription.HUMIDITY_UNIT;
         humidityLabel.setText(humidity);
     }
 }

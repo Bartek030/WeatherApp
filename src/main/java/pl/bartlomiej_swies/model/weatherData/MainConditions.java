@@ -1,9 +1,9 @@
 package pl.bartlomiej_swies.model.weatherData;
 
 public class MainConditions {
-    private float temp;
-    private int pressure;
-    private int humidity;
+    private final float temp;
+    private final int pressure;
+    private final int humidity;
 
     public MainConditions(float temp, int pressure, int humidity) {
         this.temp = temp;

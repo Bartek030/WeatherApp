@@ -1,14 +1,17 @@
 package pl.bartlomiej_swies.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
-public class NewCityForecastPanelController extends ForecastViewController {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    private OpenWeatherMapApiQuery openWeatherMapApiQuery;
+public class NewCityForecastPanelController extends ForecastViewController implements Initializable {
+
     private String cityName;
 
     @FXML
@@ -19,7 +22,12 @@ public class NewCityForecastPanelController extends ForecastViewController {
 
     public NewCityForecastPanelController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         cityName = "";
+        newCityForecastHBox.setAlignment(Pos.TOP_CENTER);
     }
 
     @FXML
@@ -27,9 +35,12 @@ public class NewCityForecastPanelController extends ForecastViewController {
         if ((!cityName.equals(newCityTextField.getText())) && !newCityTextField.getText().isEmpty()) {
             newCityForecastHBox.getChildren().clear();
             cityName = newCityTextField.getText();
-            openWeatherMapApiQuery = new OpenWeatherMapApiQuery(cityName);
-            setCurrentWeatherData(newCityForecastHBox, openWeatherMapApiQuery);
-            setDailyWeatherForecast(newCityForecastHBox, openWeatherMapApiQuery);
+            setWeatherData(newCityForecastHBox, cityName);
+        } else {
+            cityName = "";
+            newCityTextField.setText("");
         }
     }
+
+
 }

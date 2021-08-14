@@ -1,30 +1,27 @@
 package pl.bartlomiej_swies.controller;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import pl.bartlomiej_swies.Config;
-import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
+import pl.bartlomiej_swies.config.Config;
+import pl.bartlomiej_swies.config.MessageLabels;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainWindowController extends ForecastViewController implements Initializable {
 
-    private OpenWeatherMapApiQuery openWeatherMapApiQuery;
-    private String currentCityName;
     private int numberOfNewCityForecast;
 
     @FXML
     private VBox mainAppContainerVBox;
-
-    @FXML
-    private VBox currentWeatherVBox;
 
     @FXML
     private HBox weeklyWeatherHBox;
@@ -47,32 +44,30 @@ public class MainWindowController extends ForecastViewController implements Init
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        currentCityName = getUserLocation();
-        openWeatherMapApiQuery = new OpenWeatherMapApiQuery(currentCityName);
+        String currentCityName = getUserLocation();
         numberOfNewCityForecast = 0;
-        setCurrentWeatherData(currentWeatherVBox, openWeatherMapApiQuery);
-        setDailyWeatherForecast(weeklyWeatherHBox, openWeatherMapApiQuery);
+        setWeatherData(weeklyWeatherHBox, currentCityName);
         userCurrentLocationLabel.setText(currentCityName.toUpperCase());
     }
 
     private String getUserLocation() {
-        String cityName = new Geolocation().getCityName();
-        if(cityName != null) {
-            return cityName;
-        } else {
-            cityName = Config.DEFAULT_CITY_NAME;
+        try {
+            return new Geolocation().getCityName();
+        } catch (IOException | GeoIp2Exception e) {
+            e.printStackTrace();
+            viewFactory.showMessageWindow(MessageLabels.USER_LOCATION_INACCESSIBLE);
+            return Config.DEFAULT_CITY_NAME;
         }
-        return cityName;
     }
 
     @FXML
     void addNewCityForecastButtonAction() {
-        if (numberOfNewCityForecast < 3) {
+        if (numberOfNewCityForecast < Config.MAX_NUMBER_OF_NEW_CITY_FORECASTS) {
             int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
-            mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, getViewFactory().getNewCityForecastPanel());
+            mainAppContainerVBox.getChildren().add(indexOfButtonsHBox, viewFactory.getNewCityForecastPanel());
             numberOfNewCityForecast++;
             deleteLastForecastButton.setDisable(false);
-            if (numberOfNewCityForecast == 3) {
+            if (numberOfNewCityForecast == Config.MAX_NUMBER_OF_NEW_CITY_FORECASTS) {
                 addNewCityForecastButton.setDisable(true);
             }
         }
@@ -80,12 +75,12 @@ public class MainWindowController extends ForecastViewController implements Init
 
     @FXML
     void deleteLastForecastButtonAction() {
-        if(numberOfNewCityForecast > 0) {
+        if (numberOfNewCityForecast > 0) {
             int indexOfButtonsHBox = mainAppContainerVBox.getChildren().indexOf(ButtonsHBox);
             mainAppContainerVBox.getChildren().remove(indexOfButtonsHBox - 1);
             numberOfNewCityForecast--;
             addNewCityForecastButton.setDisable(false);
-            if(numberOfNewCityForecast == 0) {
+            if (numberOfNewCityForecast == 0) {
                 deleteLastForecastButton.setDisable(true);
             }
         }
