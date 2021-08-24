@@ -11,15 +11,15 @@ import java.net.URL;
 
 public class Geolocation {
 
-    private final InputStream databasePath = getClass().getResourceAsStream(Config.GEOLOCATION_DATABASE_PATH);
+    protected final InputStream databasePath = getClass().getResourceAsStream(Config.GEOLOCATION_DATABASE_PATH);
 
     public  String getCityName() throws IOException, GeoIp2Exception {
         String ipAddress = getIpAddress();
-            File database = streamToFile(databasePath);
-            DatabaseReader databaseReader = new DatabaseReader.Builder(database).build();
-            InetAddress inetAddress = InetAddress.getByName(ipAddress);
-            CityResponse cityResponse = databaseReader.city(inetAddress);
-            return cityResponse.getCity().getName();
+        File database = streamToFile(databasePath);
+        DatabaseReader databaseReader = new DatabaseReader.Builder(database).build();
+        InetAddress inetAddress = InetAddress.getByName(ipAddress);
+        CityResponse cityResponse = databaseReader.city(inetAddress);
+        return cityResponse.getCity().getName();
     }
 
     private String getIpAddress() throws IOException {
