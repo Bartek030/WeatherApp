@@ -54,7 +54,6 @@ public class MainWindowController extends ForecastViewController implements Init
         try {
             return new Geolocation().getCityName();
         } catch (IOException | GeoIp2Exception e) {
-            e.printStackTrace();
             viewFactory.showMessageWindow(MessageLabels.USER_LOCATION_INACCESSIBLE);
             return Config.DEFAULT_CITY_NAME;
         }

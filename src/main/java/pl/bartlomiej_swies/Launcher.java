@@ -16,7 +16,7 @@ public class Launcher extends Application {
     public void start(Stage stage) {
 
         ViewFactory viewFactory = new ViewFactory();
-        if (isUserConnectedToTheInternet()) {
+        if (Launcher.isUserConnectedToTheInternet()) {
             viewFactory.showMainWindow();
         } else {
             viewFactory.showMessageWindow(MessageLabels.NO_INTERNET_CONNECTION);
@@ -34,7 +34,6 @@ public class Launcher extends Application {
             urlConnection.connect();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
     }

@@ -26,7 +26,6 @@ public abstract class ForecastViewController extends BaseController {
             setCurrentWeatherData(pane, currentWeatherData);
             setDailyWeatherForecast(pane, dailyForecastData);
         } catch (IOException e) {
-            e.printStackTrace();
             viewFactory.showMessageWindow(MessageLabels.NO_RESULTS_FROM_API);
         }
     }

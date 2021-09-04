@@ -77,7 +77,6 @@ public class ViewFactory {
         try {
             parent = fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
         return parent;
