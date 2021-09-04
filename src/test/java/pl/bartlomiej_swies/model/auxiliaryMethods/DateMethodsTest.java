@@ -7,14 +7,14 @@ import static org.hamcrest.Matchers.equalTo;
 
 class DateMethodsTest {
 
+    public static final long AUGUST_22_08 = 1629624690000L;
+
     @Test
     void getDayOfTheWeekFromNumberOfMillis() {
 
         //given
-        long numberOfMillis = 1629624690000l;
-
         //when
-        String dayOfTheWeek = DateMethods.getDayOfTheWeekFromNumberOfMillis(numberOfMillis);
+        String dayOfTheWeek = DateMethods.getDayOfTheWeekFromNumberOfMillis(AUGUST_22_08);
 
         //then
         assertThat(dayOfTheWeek, equalTo("niedziela"));
@@ -24,10 +24,8 @@ class DateMethodsTest {
     void getDateFromNumberOfMillis() {
 
         //given
-        long numberOfMillis = 1629624690000l;
-
         //when
-        String date = DateMethods.getDateFromNumberOfMillis(numberOfMillis);
+        String date = DateMethods.getDateFromNumberOfMillis(AUGUST_22_08);
 
         //then
         assertThat(date, equalTo("22-08-2021"));
