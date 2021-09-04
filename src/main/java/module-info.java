@@ -10,4 +10,6 @@ module pl.bartlomiej_swies {
     opens pl.bartlomiej_swies.model;
     opens pl.bartlomiej_swies.config;
     opens pl.bartlomiej_swies.model.auxiliaryMethods;
+    opens pl.bartlomiej_swies.model.geolocation;
+    opens pl.bartlomiej_swies.model.weatherData;
 }
