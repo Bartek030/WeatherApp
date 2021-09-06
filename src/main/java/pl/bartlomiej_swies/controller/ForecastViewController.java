@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import pl.bartlomiej_swies.config.MessageLabels;
 import pl.bartlomiej_swies.model.CurrentWeatherData;
 import pl.bartlomiej_swies.model.DailyForecastData;
+import pl.bartlomiej_swies.model.DefaultOpenWeatherMapApiClient;
 import pl.bartlomiej_swies.model.OpenWeatherMapApiQuery;
 import pl.bartlomiej_swies.view.ViewFactory;
 
@@ -17,7 +18,7 @@ public abstract class ForecastViewController extends BaseController {
 
     protected void setWeatherData(Pane pane, String cityName) {
         try {
-            OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery();
+            OpenWeatherMapApiQuery openWeatherMapApiQuery = new OpenWeatherMapApiQuery(new DefaultOpenWeatherMapApiClient());
             CurrentWeatherData currentWeatherData = openWeatherMapApiQuery.getCurrentWeatherData(cityName);
             DailyForecastData dailyForecastData = openWeatherMapApiQuery.getDailyForecastData(
                     currentWeatherData.getCoord().getLat(),
