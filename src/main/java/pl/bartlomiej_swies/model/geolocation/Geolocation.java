@@ -9,7 +9,7 @@ import pl.bartlomiej_swies.model.auxiliaryMethods.UserConnection;
 import java.io.*;
 import java.net.InetAddress;
 
-public class Geolocation {
+public class Geolocation implements GeolocationProvider {
 
     private final InputStream databasePath = getClass().getResourceAsStream(Config.GEOLOCATION_DATABASE_PATH);
     private UserConnection userConnection = new UserConnection();

@@ -2,7 +2,6 @@ package pl.bartlomiej_swies.model.geolocation;
 
 import pl.bartlomiej_swies.model.OpenWeatherMapApiClient;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
