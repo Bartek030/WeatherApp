@@ -4,7 +4,7 @@ import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import pl.bartlomiej_swies.config.Config;
-import pl.bartlomiej_swies.model.auxiliaryMethods.UserConnection;
+import pl.bartlomiej_swies.model.auxiliaryMethods.Connection;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -12,7 +12,11 @@ import java.net.InetAddress;
 public class Geolocation implements GeolocationProvider {
 
     private final InputStream databasePath = getClass().getResourceAsStream(Config.GEOLOCATION_DATABASE_PATH);
-    private UserConnection userConnection = new UserConnection();
+    private Connection userConnection;
+
+    public Geolocation(Connection userConnection) {
+        this.userConnection = userConnection;
+    }
 
     public String getCityName() throws IOException, GeoIp2Exception {
         String ipAddress = userConnection.getIpAddress();

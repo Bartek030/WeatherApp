@@ -4,12 +4,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import pl.bartlomiej_swies.config.MessageLabels;
+import pl.bartlomiej_swies.model.auxiliaryMethods.Connection;
 import pl.bartlomiej_swies.model.auxiliaryMethods.UserConnection;
 import pl.bartlomiej_swies.view.ViewFactory;
 
 public class Launcher extends Application {
 
-    UserConnection userConnection = new UserConnection();
+    Connection userConnection = new UserConnection();
 
     @Override
     public void start(Stage stage) {

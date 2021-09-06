@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.bartlomiej_swies.config.Config;
 import pl.bartlomiej_swies.config.MessageLabels;
+import pl.bartlomiej_swies.model.auxiliaryMethods.UserConnection;
 import pl.bartlomiej_swies.model.geolocation.Geolocation;
 import pl.bartlomiej_swies.view.ViewFactory;
 
@@ -52,7 +53,7 @@ public class MainWindowController extends ForecastViewController implements Init
 
     private String getUserLocation() {
         try {
-            return new Geolocation().getCityName();
+            return new Geolocation(new UserConnection()).getCityName();
         } catch (IOException | GeoIp2Exception e) {
             viewFactory.showMessageWindow(MessageLabels.USER_LOCATION_INACCESSIBLE);
             return Config.DEFAULT_CITY_NAME;
