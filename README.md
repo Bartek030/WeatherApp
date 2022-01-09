@@ -5,7 +5,7 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
-* [Usage](#usage)
+* [Setup](#setup)
 
 ## General Information
 - Desktop application, built in JavaFX
@@ -34,7 +34,7 @@ List the ready features here:
 ![Screenshot](http://bartlomiej-swies.pl/wp-content/uploads/2021/08/Prognoza_pogody.png)
 
 
-## Usage
+## Setup
 To run the application just download the .jar file from my website:
 
 https://bartlomiej-swies.pl/portfolio/prognoza-pogody/
