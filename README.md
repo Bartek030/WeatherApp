@@ -31,7 +31,7 @@ List the ready features here:
 - Information about the 7-day forecast for user geoposition and up to 3 selected locations
 
 ## Screenshots
-![Screenshot](http://bartlomiej-swies.pl/wp-content/uploads/2021/08/Prognoza_pogody.png)
+![Screen](https://github.com/Bartek030/WeatherApp/blob/master/screen.PNG)
 
 
 ## Setup
