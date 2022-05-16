@@ -35,10 +35,6 @@ List the ready features here:
 
 
 ## Setup
-To run the application just download the .jar file from my website:
-
-https://bartlomiej-swies.pl/portfolio/prognoza-pogody/
-
-Click the button at the bottom of the website.
+To run the application just download the .jar file
 
 **JDK 11 is required to run the application.**
